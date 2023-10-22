@@ -1,7 +1,4 @@
 @import "custom";
+@import "~bootswatch/dist/minty/variables";
 @import "~bootstrap/scss/bootstrap";
-
-
-body {
-    background-color: lightgray;
-}
+@import "~bootswatch/dist/minty/bootswatch";
