@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Connexion;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
@@ -50,16 +50,17 @@ class RegistrationController extends AbstractController
                 (new TemplatedEmail())
                     ->from(new Address('spells.and.glitters@lunidev.fr', 'Spells And Glitters Mailer'))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->subject('Veuillez confirmer votre email.')
+                    ->htmlTemplate('Admin/registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('app_test');
         }
 
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+        return $this->render('Admin/registration/register.html.twig', [
+            'registrationForm'  => $form->createView(),
+            'title'             => 'Inscription'
         ]);
     }
 
@@ -78,7 +79,7 @@ class RegistrationController extends AbstractController
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
+        $this->addFlash('success', 'Votre email a bien été confirmée.');
 
         return $this->redirectToRoute('app_register');
     }
