@@ -1,0 +1,10 @@
+{% block items %}
+
+	{% for item in field.value|slice(0,3) %}
+		{{item.title}},
+		{% if loop.last %} ... {% endif %}
+	{% endfor %}
+	{% if field.value|length > 3 %} <i> and {{field.value|length - 3}} more </i>{% endif %}
+
+
+{% endblock %}

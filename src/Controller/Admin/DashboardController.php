@@ -33,14 +33,13 @@ class DashboardController extends AbstractDashboardController
     {
         return [
             MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
+            MenuItem::section('Gesion Creations'),
+            MenuItem::linkToCrud('Categories', 'fas fa-list', Category::class),
+            MenuItem::linkToCrud('Creations', 'fa fa-dice-d20', Item::class),
             MenuItem::section('Membre'),
             MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class),
-            MenuItem::subMenu('Creations', 'fa fa-dice-d20')->setSubItems([
-                MenuItem::linkToCrud('Categories', 'fas fa-bookmark', Category::class),
-                MenuItem::linkToCrud('Items', 'fa fa-list', Item::class),
-            ]),
             MenuItem::section('Retour au site'),
-            MenuItem::linkToRoute('Accueil du site', 'fa fa-home', 'app_home')
+            MenuItem::linkToRoute('Accueil du site', 'fa fa-right-to-bracket', 'app_home')
         ];
     }
 }
