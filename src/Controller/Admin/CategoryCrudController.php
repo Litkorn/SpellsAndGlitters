@@ -8,7 +8,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-// use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 class CategoryCrudController extends AbstractCrudController
 {
