@@ -5,6 +5,8 @@
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
+
+
     {% if app.user %}
         <div class="mb-3 h4 font-sawarabi">
             Vous êtes connecté(e) avec l'email: {{ app.user.userIdentifier }}
