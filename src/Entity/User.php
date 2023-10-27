@@ -2,14 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'Un compte associé à cet email existe déjà.')]
@@ -20,6 +21,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message:'Veuillez saisir votre adresse email')]
+    #[Assert\Email(message:'Veuillez saisir une adresse email valide')]
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
@@ -29,6 +32,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
+    #[Assert\Length(min: 8, minMessage: 'Votre mot de passe doit faire au moin {{ limit }} caractères')]
+    #[Assert\Regex( pattern:'/^(?=.*[a-z])(?=.*\d)(?=.*[@$!%#*?&])[A-Za-z\d@$!%#*?&]{8,}$/',
+    message:'Votre mot de passe doit contenir au moins un chiffre, un caractère special, une lettre en majuscule et une minuscule !')]
+    #[Assert\NotBlank(message:'Veuillez saisir votre mot de passe')]
     #[ORM\Column]
     private ?string $password = null;
 

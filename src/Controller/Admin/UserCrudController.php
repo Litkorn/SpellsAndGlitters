@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use Datetime;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -9,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -49,8 +51,17 @@ class UserCrudController extends AbstractCrudController
             TextField::new('lastname'),
             TextField::new('name'),
             TextField::new('password', 'Mot de passe')->setFormType(PasswordType::class)->onlyWhenCreating(),
-            CollectionField::new('roles')->setTemplatePath('/admin/fields/roles.html.twig')
+            CollectionField::new('roles')->setTemplatePath('/admin/fields/roles.html.twig'),
+            DateTimeField::new('createdAt')->setFormat('d/M/Y')->hideOnForm(),
         ];
+    }
+
+    public function createEntity(string $entityFqcn)
+    {
+        $user = new $entityFqcn;
+
+        $user->setCreatedAt(new Datetime);
+        return $user;
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
