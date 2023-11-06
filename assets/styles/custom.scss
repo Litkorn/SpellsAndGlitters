@@ -20,7 +20,7 @@ $yellow: rgb(235, 200, 84);
 $green: rgb(111, 193, 147);
 $teal: rgb(32, 201, 151);
 $cyan: rgb(85, 196, 196);
-$primary: rgb(132, 103, 215);
+$primary: #CCCCFF;
 $secondary: $gray-800;
 $success: $green;
 $info: $cyan;
@@ -57,7 +57,7 @@ $headings-font-family: 'Alice', serif;;
   --white: #fff;
   --gray: #888;
   --gray-dark: #353542;
-  --primary: #8467d7;
+  --primary: #CCCCFF;
   --secondary: #353542;
   --success: #6fc193;
   --info: #55c4c4;
@@ -2279,7 +2279,7 @@ input[type="button"].btn-block {
   .dropdown-toggle::after {
     display: inline-block;
     margin-left: 0.255em;
-    vertical-align: 0.255em;
+    vertical-align: 0.05em !important;
     content: "";
     border-top: 0.3em solid;
     border-right: 0.3em solid transparent;
