@@ -37,12 +37,12 @@ $breadcrumb-bg: $secondary;
 $breadcrumb-divider-color: $white;
 $breadcrumb-active-color: $white;
 $body-color: $secondary;
-$headings-font-family: 'Aclonica', sans-serif;
+$headings-font-family: 'Alice', serif;;
 
 
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
-@import url(https://fonts.googleapis.com/css?family=Aclonica);
 @import url(https://fonts.googleapis.com/css?family=Sawarabi+Gothic);
+@import url('https://fonts.googleapis.com/css2?family=Alice&display=swap');
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -334,7 +334,7 @@ template {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 0.5rem;
-  font-family: "Aclonica", sans-serif;
+  font-family: 'Alice', serif;;
   font-weight: 500;
   line-height: 1.2;
   color: #5c5d75; }
@@ -7214,7 +7214,7 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #eceeef; } }
 
 .navbar {
-  font-family: "Aclonica", sans-serif; }
+  font-family: 'Alice', serif;; }
 
 .bg-dark {
   background-color: #353542 !important; }
@@ -7223,7 +7223,7 @@ a.text-dark:hover, a.text-dark:focus {
   border-color: #353542 !important; }
 
 .btn {
-  font-family: "Aclonica", sans-serif; }
+  font-family: 'Alice', serif; }
   .btn, .btn:hover {
     color: #fff; }
   .btn-light, .btn-light:hover {
@@ -7327,10 +7327,10 @@ a.text-dark:hover, a.text-dark:focus {
 .table .thead-dark th {
   background-color: #8467d7;
   border-color: #eceeef;
-  font-family: "Aclonica", sans-serif; }
+  font-family: 'Alice', serif;; }
 
 legend {
-  font-family: "Aclonica", sans-serif; }
+  font-family: 'Alice', serif;; }
 
 .dropdown-menu {
   font-family: "Sawarabi Gothic", sans-serif; }

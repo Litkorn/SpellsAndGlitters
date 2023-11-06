@@ -7,18 +7,19 @@
 
     <h1 class="h3 mb-3 font-weight-normal">S'inscrire</h1>
 
+    <div class="container-fluid col-2 my-3">
     {{ form_errors(registrationForm) }}
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+            {{ form_row(registrationForm.agreeTerms, {
+                label: 'En validant mon inscription, j\'accepte les <a href="' ~ path("app_cgu") ~ '">' ~ "CGU" ~ '</a>.',
+                label_html: true
+            }) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms, {
-            label: 'En validant mon inscription, j\'accepte les <a href="' ~ path("app_cgu") ~ '">' ~ "CGU" ~ '</a>.',
-            label_html: true
-        }) }}
-
-        <button type="submit" class="btn btn-primary">Inscription</button>
-    {{ form_end(registrationForm) }}
+            <button type="submit" class="btn btn-primary">Inscription</button>
+        {{ form_end(registrationForm) }}
+    </div>
 {% endblock %}
