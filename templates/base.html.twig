@@ -13,7 +13,8 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
-    <body>
+    <body class="d-flex flex-column" style="min-height: 100vh;">
+
         {% block header %}
             {# we get the route to make conditionnal display in the navbar #}
             {% set route = app.request.attributes.get('_route') %}
@@ -75,7 +76,14 @@
 
         {% endblock %}
 
-        {% block footer %}{% endblock %}
+        {% block footer %}
+            <footer class="footer mt-auto py-3 bg-primary">
+                <div class="container text-center">
+                    <span>Test</span>
+                </div>
+            </footer>
+
+        {% endblock %}
 
 
         {% block javascripts %}
