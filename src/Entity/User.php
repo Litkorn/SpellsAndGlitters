@@ -33,9 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[Assert\Length(min: 8, minMessage: 'Votre mot de passe doit faire au moin {{ limit }} caractères')]
-    #[Assert\Regex( pattern:'/^(?=.*[a-z])(?=.*\d)(?=.*[@$!%#*?&])[A-Za-z\d@$!%#*?&]{8,}$/',
-    message:'Votre mot de passe doit contenir au moins un chiffre, un caractère special, une lettre en majuscule et une minuscule !')]
-    #[Assert\NotBlank(message:'Veuillez saisir votre mot de passe')]
+    #[Assert\Regex( pattern:'/^(?=.*[a-z])(?=.*\d)(?=.*[@$!%#*?&])[A-Za-z\d@$!%#*?&]{8,}$/', message:'Votre mot de passe doit contenir au moins un chiffre, un caractère special, une lettre en majuscule et une minuscule !')]
     #[ORM\Column]
     private ?string $password = null;
 
