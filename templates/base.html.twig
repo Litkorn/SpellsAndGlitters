@@ -52,25 +52,20 @@
                                 <li class="nav-item">
                                     <a class="nav-link {% if route == 'app_contact' %} active {% endif %}" href="#">Contact</a>
                                 </li>
-                                {% if app.user %}
-                                    <li class="nav-item">
-                                        <a class="nav-link {# {% if route == 'app_profil' %} active {% endif %}" href="{{ path('app_profil') }} #}"><span class="fas fa-user fa-lg"/></a>
-                                    </li>
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                        <li class="nav-item">
-                                            <button class="btn btn-danger text-ligh p-0 mt-1"><a class="nav-link" href="{{ path('admin') }}">Administation</a></button>
-                                            {# <a class="nav-link bg-danger text-light enable-rounded" href="{{ path('admin') }}">Administration</a> #}
-                                        </li>
-                                    {% endif %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><span class="fas fa-user fa-lg"/></a>
+                                    <div class="dropdown-menu" style="font-size: 2vh !important;">
+                                    {% if app.user %}
+                                            {% if is_granted('ROLE_ADMIN') %}
+                                                <a class="dropdown-item bg-danger" href="{{ path('admin') }}">Administation</a></button>
+                                            {% endif %}
+                                            <a class="dropdown-item" {# href="{{ path('app_profile') }}" #}>Profil</a>
+                                            <a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a>
                                         {% else %}
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><span class="fas fa-user fa-lg"/></a>
-                                        <div class="dropdown-menu" style="font-size: 2vh !important;">
                                             <a class="dropdown-item" href="{{ path('app_register') }}">Inscription</a>
                                             <a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a>
-                                        </div>
-                                    </li>
-                                {% endif %}
+                                    {% endif %}
+                                </li>
                             </ul>
                         </div>
                     </div>

@@ -44,7 +44,6 @@ class RegistrationController extends AbstractController
             $user->setCreatedAt(new \DateTime);
             $entityManager->persist($user);
             $entityManager->flush();
-
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
