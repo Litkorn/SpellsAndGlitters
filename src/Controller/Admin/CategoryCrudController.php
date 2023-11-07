@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 
+
 class CategoryCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
