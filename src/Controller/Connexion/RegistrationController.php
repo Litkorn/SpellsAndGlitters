@@ -59,7 +59,7 @@ class RegistrationController extends AbstractController
 
         return $this->render('Admin/registration/register.html.twig', [
             'registrationForm'  => $form->createView(),
-            'title'             => 'Inscription'
+            'title'             => 'Inscription | Spells and Glitters'
         ]);
     }
 

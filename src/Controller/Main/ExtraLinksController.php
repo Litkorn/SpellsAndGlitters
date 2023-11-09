@@ -12,7 +12,7 @@ class ExtraLinksController extends AbstractController
     public function index(): Response
     {
         return $this->render('Main/extra_links/index.html.twig', [
-            'title' => 'Conditions Générales d\'Utilisation',
+            'title' => 'CGU | Spells and Glitters',
             'controller_name' => 'CGU'
         ]);
     }
