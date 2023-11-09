@@ -4,22 +4,33 @@
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
+    {% if app.user %}
+        <div class="container-fluid col-10 col-md-4 my-3 text-center">
+            <span>Vous êtes connecté(e) avec l'email: {{ app.user.userIdentifier }}</span>
+            <div class="d-flex">
+                <button class="btn btn-primary mt-3 d-block ml-auto mr-1 text-secondary" href="{{ path('app_home') }}">Accueil</button>
+                <button class="btn btn-secondary mt-3 d-block mr-auto ml-1" href="{{ path('app_logout') }}">Se deconnecter</button>
+            </div>
+        </div>
+    {% else %}
+        <div class="container-fluid col-10 col-md-4 my-3">
+            <h1 class="h3 mb-3 font-weight-normal text-center">S'inscrire</h1>
 
-    <h1 class="h3 mb-3 font-weight-normal">S'inscrire</h1>
+            <div>
+            {{ form_errors(registrationForm) }}
+                {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Password'
+                    }) }}
+                    {{ form_row(registrationForm.agreeTerms, {
+                        label: 'En validant mon inscription, j\'accepte les <a href="' ~ path("app_cgu") ~ '">' ~ "CGU" ~ '</a>.',
+                        label_html: true
+                    }) }}
 
-    <div class="container-fluid col-2 my-3">
-    {{ form_errors(registrationForm) }}
-        {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.plainPassword, {
-                label: 'Password'
-            }) }}
-            {{ form_row(registrationForm.agreeTerms, {
-                label: 'En validant mon inscription, j\'accepte les <a href="' ~ path("app_cgu") ~ '">' ~ "CGU" ~ '</a>.',
-                label_html: true
-            }) }}
-
-            <button type="submit" class="btn btn-primary text-secondary">Inscription</button>
-        {{ form_end(registrationForm) }}
-    </div>
+                    <button type="submit" class="btn btn-primary text-secondary d-block mx-auto">Inscription</button>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
