@@ -12,7 +12,8 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         return $this->render('Main/home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'controller_name'   => 'HomeController',
+            'title'             => 'Accueil | Spells and Glitters'
         ]);
     }
 }
