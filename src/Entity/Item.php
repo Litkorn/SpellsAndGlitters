@@ -6,6 +6,7 @@ use App\Repository\ItemRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ItemRepository::class)]
@@ -34,6 +35,7 @@ class Item
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
+    #[Assert\NotBlank]
     #[ORM\ManyToOne(inversedBy: 'items')]
     private ?Category $category = null;
 
