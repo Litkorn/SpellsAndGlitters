@@ -38,8 +38,23 @@
 	width: 100%;
 }
 
+.other-cat{
+	object-fit: cover;
+	height: 400px;
+}
+
+div .txt-home{
+	text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
+}
+
 @include media-breakpoint-up(xl) {
 	.fond{
 		min-height: 250px;
+	}
+}
+
+@include media-breakpoint-down(md){
+	.other-cat{
+		height: 200px;
 	}
 }

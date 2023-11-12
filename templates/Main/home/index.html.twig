@@ -2,42 +2,63 @@
 
 {% block body %}
 
-    {# Banner #}
-
-    <section class="fond">
-        {# <img src="{{ asset("assets/img/banner.jpg") }}" alt="" style="max-height: 200px; width: 100%"> #}
-    </section>
     {# New creation #}
+    {# TODO: make it in loop with 4 last added creations #}
     <section class="container text-center">
         <h1 class="my-5">Nouveautés</h1>
         <div class="row ">
             <div class="col-lg-3 col-md-6 col-6 h-100 fadein mb-3">
                 <img class="card-img-top" src="https://source.unsplash.com/pWkk7iiCoDM/400x300" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title mt-2 h4 text-start">Card title</h5>
+                    <h5 class="mt-2 fs-4 font-sawarabi text-start">Card title</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-6 h-100 fadein mb-3">
                 <img class="card-img-top" src="https://source.unsplash.com/aob0ukAYfuI/400x300" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title mt-2 h4 text-start">Card title</h5>
+                    <h5 class="mt-2 fs-4 font-sawarabi text-start">Card title</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-6 h-100 fadein mb-3">
                 <img class="card-img-top" src="https://source.unsplash.com/EUfxH-pze7s/400x300" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title mt-2 h4 text-start">Card title</h5>
+                    <h5 class=" mt-2 fs-4 font-sawarabi text-start">Card title</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-6 h-100 fadein mb-3">
                 <img class="card-img-top" src="https://source.unsplash.com/M185_qYH8vg/400x300" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title mt-2 h4 text-start">Card title</h5>
+                    <h5 class="mt-2 fs-4 font-sawarabi text-start">Card title</h5>
                 </div>
             </div>
         </div>
-        <a class="btn btn-primary home-button text-secondary mt-4 mb-5" href="">Tout voir</a>
+        <a class="btn btn-primary home-button text-secondary mt-4 mb-5" href="{# {{ path('app_news') }} #}">Tout voir</a>
         <hr>
     </section>
 
+    <section class="text-center">
+        <h2 class="my-5">En voir plus</h2>
+        <div class="row">
+            <div class="col-md col-8 fadein p-0 mx-auto mb-2 position-relative">
+                <img class="card-img-top other-cat" src="{{ asset("assets/img/crochet.jpg") }}" alt="...">
+                <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Crochet</div>
+            </div>
+            <div class="col-md col-8 fadein p-0 mx-auto mb-2">
+                <img class="card-img-top other-cat" src="{{ asset("assets/img/resine.jpg") }}" alt="...">
+                <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Résine</div>
+            </div>
+            <div class="col-md col-8 fadein p-0 mx-auto mb-2">
+                <img class="card-img-top other-cat" src="{{ asset("assets/img/peinture.jpg") }}" alt="...">
+                <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Peinture</div>
+            </div>
+            <div class="col-md col-8 fadein p-0 mx-auto mb-2">
+                <img class="card-img-top other-cat" src="{{ asset("assets/img/digital.png") }}" alt="...">
+                <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Dessin digital</div>
+            </div>
+            <div class="col-md col-8 fadein p-0 mx-auto mb-2">
+                <img class="card-img-top other-cat" src="{{ asset("assets/img/fimo.jpg") }}" alt="...">
+                <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Argile polymère</div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
