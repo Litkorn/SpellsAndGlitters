@@ -58,3 +58,27 @@ div .txt-home{
 		height: 200px;
 	}
 }
+
+.star {
+	position: fixed;
+	pointer-events: none;
+}
+
+.star:before, .star:after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: '\2726';
+	font-size: 12px;
+}
+
+.star:before {
+	color: transparent;
+	text-shadow: #503080;
+}
+
+.star:after {
+	background: $primary;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
