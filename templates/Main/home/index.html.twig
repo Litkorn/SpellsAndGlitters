@@ -2,35 +2,17 @@
 
 {% block body %}
 
-    {# New creation #}
-    {# TODO: make it in loop with 4 last added creations #}
+    {# New creation section #}
+
     <section class="container text-center">
         <h1 class="my-5">Nouveautés</h1>
-        <div class="row ">
-            <div class="col-lg-3 col-md-6 col-6 h-100 fadein mb-3">
-                <img class="card-img-top" src="https://source.unsplash.com/pWkk7iiCoDM/400x300" alt="...">
-                <div class="card-body">
-                    <h5 class="mt-2 fs-4 font-sawarabi text-start">Card title</h5>
+            <div class="row">
+            {% for creation in creations %}
+                <div class="col-lg-3 col-md-6 col-6 h-100 fadein mb-3 text-start">
+                    <img class="card-img-top picture-home" src="{{ asset(dl_dir ~ creation.picture) }}" alt="{{creation.title}}" style="height: 300px; object-fit: cover;">
+                    <span class="mt-2 fs-5 font-sawarabi">{{ creation.title|slice(0,30) }}</span>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-6 h-100 fadein mb-3">
-                <img class="card-img-top" src="https://source.unsplash.com/aob0ukAYfuI/400x300" alt="...">
-                <div class="card-body">
-                    <h5 class="mt-2 fs-4 font-sawarabi text-start">Card title</h5>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-6 h-100 fadein mb-3">
-                <img class="card-img-top" src="https://source.unsplash.com/EUfxH-pze7s/400x300" alt="...">
-                <div class="card-body">
-                    <h5 class=" mt-2 fs-4 font-sawarabi text-start">Card title</h5>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-6 h-100 fadein mb-3">
-                <img class="card-img-top" src="https://source.unsplash.com/M185_qYH8vg/400x300" alt="...">
-                <div class="card-body">
-                    <h5 class="mt-2 fs-4 font-sawarabi text-start">Card title</h5>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         <a class="btn btn-primary home-button text-secondary mt-4 mb-5" href="{# {{ path('app_news') }} #}">Tout voir</a>
         <hr>
@@ -38,36 +20,37 @@
 
     {# "See more" section #}
     {# TODO: Add link to creations page matching to category #}
+
     <section class="text-center">
         <h2 class="my-5">En voir plus</h2>
         <div class="row mb-5">
             <div class="col-md col-8 fadein p-0 mx-auto mb-2 position-relative">
                 <a href="">
-                    <img class="card-img-top other-cat" src="{{ asset("assets/img/crochet.jpg") }}" alt="...">
+                    <img class="card-img-top picture-home" src="{{ asset("assets/img/crochet.jpg") }}" alt="...">
                     <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Crochet</div>
                 </a>
             </div>
             <div class="col-md col-8 fadein p-0 mx-auto mb-2">
                 <a href="">
-                    <img class="card-img-top other-cat" src="{{ asset("assets/img/resine.jpg") }}" alt="...">
+                    <img class="card-img-top picture-home" src="{{ asset("assets/img/resine.jpg") }}" alt="...">
                     <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Résine</div>
                 </a>
             </div>
             <div class="col-md col-8 fadein p-0 mx-auto mb-2">
                 <a href="">
-                    <img class="card-img-top other-cat" src="{{ asset("assets/img/peinture.jpg") }}" alt="...">
+                    <img class="card-img-top picture-home" src="{{ asset("assets/img/peinture.jpg") }}" alt="...">
                     <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Peinture</div>
                 </a>
             </div>
             <div class="col-md col-8 fadein p-0 mx-auto mb-2">
                 <a href="">
-                    <img class="card-img-top other-cat" src="{{ asset("assets/img/digital.png") }}" alt="...">
+                    <img class="card-img-top picture-home" src="{{ asset("assets/img/digital.png") }}" alt="...">
                     <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Dessin digital</div>
                 </a>
             </div>
             <div class="col-md col-8 fadein p-0 mx-auto mb-2">
                 <a href="">
-                    <img class="card-img-top other-cat" src="{{ asset("assets/img/fimo.jpg") }}" alt="...">
+                    <img class="card-img-top picture-home" src="{{ asset("assets/img/fimo.jpg") }}" alt="...">
                     <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Argile polymère</div>
                 </a>
             </div>
