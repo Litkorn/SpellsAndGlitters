@@ -8,10 +8,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 
 class CategoryCrudController extends AbstractCrudController
@@ -42,8 +43,8 @@ class CategoryCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('title'),
             DateTimeField::new('createdAt')->setFormat('d/M/Y à H:m:s')->hideOnForm(),
-            CollectionField::new('items')->hideOnIndex(),
             CollectionField::new('items')->setTemplatePath('/admin/fields/items.html.twig')->onlyOnIndex(),
+            SlugField::new('slug')->setTargetFieldName('title')->hideOnIndex()
         ];
     }
 
