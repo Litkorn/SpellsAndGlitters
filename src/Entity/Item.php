@@ -17,7 +17,7 @@ class Item
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\Length(max: 30, maxMessage: "Le titre ne peut depasser {{ limit }} caractères")]
+    #[Assert\Length(max: 120, maxMessage: "Le titre ne peut depasser {{ limit }} caractères")]
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 

@@ -10,7 +10,25 @@
             {% for creation in creations %}
                 <div class="col-lg-3 col-md-6 col-6 h-100 fadein mb-3 text-start">
                     <img class="card-img-top picture-home" src="{{ asset(dl_dir ~ creation.picture) }}" alt="{{creation.title}}" style="height: 300px; object-fit: cover;">
-                    <span class="mt-2 fs-5 font-sawarabi">{{ creation.title|slice(0,30) }}</span>
+                    <div class="position-relative">
+                        <span class="mt-2 fs-5 font-sawarabi p-md-0 pr-5">{{ creation.title }}</span>
+                        <span class="position-absolute top-0 end-0">
+                            {% if is_granted("ROLE_USER") %}
+                                {% for favorite in creation.favorites %}
+                                    {% if favorite.id == app.user.id %}
+                                        <i class="fa-solid fa-heart fa-lg" style="color: #ffa494"></i>
+                                    {% else %}
+                                        <i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i>
+                                    {% endif %}
+                                {% else %}
+                                    <i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i>
+                                {% endfor %}
+                            {% else %}
+                                <i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i>
+                            {% endif %}
+
+                        </span>
+                    </div>
                 </div>
             {% endfor %}
         </div>
