@@ -17,100 +17,15 @@
     <body class="d-flex flex-column" style="min-height: 100vh;">
 
         {% block header %}
-            {# we get the route to make conditionnal display in the navbar #}
-            {% set route = app.request.attributes.get('_route') %}
-                {# Navigation Bar #}
-                <nav class="navbar navbar-expand-lg bg-primary py-3 h4 mb-0">
-                    <div class="container col-xxl-8 p-0">
-                        {# Logo with 2 variations: one for >= lg screen, one for <=md screen #}
-                        <a class="navbar-brand" href="{{ path('app_home')}}">
-                            <img class="d-none d-lg-block"src="{{ asset('assets/img/spellsLine2.png') }}" alt="Logo Spells & Glitters" style="max-height: 50px;">
-                            <img class="d-lg-none" src="{{ asset('assets/img/spellsLine.png') }}" alt="Logo Spells & Glitters" style="max-height: 100px;">
-                        </a>
-                        {# burger menu icon #}
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon" ></span>
-                        </button>
-                        {# elements of our navbar that'll be in the burger menu for smaller screens #}
-                        <div class="collapse navbar-collapse" id="navbarColor01">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item">
-                                <a class="nav-link {% if route == 'app_home' %} active {% endif %}" href="{{ path('app_home') }}">Acceuil
-                                    <span class="visually-hidden">(current)</span>
-                                </a>
-                                </li>
-                                {# dropdown with some links #}
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle {% if route == 'app_creations' %} active {% endif %}" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" >Créations</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Résine</a>
-                                        <a class="dropdown-item" href="#">Argile Polymère</a>
-                                        <a class="dropdown-item" href="#">Dessin digital</a>
-                                        <a class="dropdown-item" href="#">Crochet</a>
-                                        <a class="dropdown-item" href="#">Peinture</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {% if route == 'app_news' %} active {% endif %}" href="#">Nouveautés</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {% if route == 'app_about' %} active {% endif %}" href="#">A propos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {% if route == 'app_contact' %} active {% endif %}" href="#">Contact</a>
-                                </li>
-                                {# dropdown with conditionnal links #}
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><span class="fas fa-user fa-lg"/></a>
-                                    <div class="dropdown-menu">
-                                    {# if user is identified #}
-                                    {% if app.user %}
-                                            {# if user is granted admin role -> display admin link #}
-                                            {% if is_granted('ROLE_ADMIN') %}
-                                                <a class="dropdown-item bg-danger" href="{{ path('admin') }}">Administation</a></button>
-                                            {% endif %}
-                                            {# display profile and connexion links in all cases for user identified #}
-                                            <a class="dropdown-item" {# href="{{ path('app_profile') }}" #}>Profil</a>
-                                            <a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a>
-                                        {% else %}
-                                            {# display register and login links if user isn't identified #}
-                                            <a class="dropdown-item" href="{{ path('app_register') }}">Inscription</a>
-                                            <a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a>
-                                    {% endif %}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+            {# header include #}
+            {% include "_partials/_header.html.twig" %}
         {% endblock %}
         {% block body %}
-
         {% endblock %}
 
         {% block footer %}
-            {# footer with useful links #}
-            <footer class="mt-auto py-3 bg-primary">
-                <div class="container text-center">
-                    <div class="d-flex justify-content-center flex-column">
-                        <a class="nav-link mx-auto " href="">CGU</a>
-                        <a class="nav-link mx-auto" href="">RGPD</a>
-                        <a class="nav-link mx-auto" href="">Politique de confidentialité</a>
-                        <a class="nav-link mx-auto" href="">Mentions Légales</a>
-                        <a class="nav-link mx-auto" href="">Plan du site</a>
-                    </div>
-                    <hr>
-                            {# TODO: links to social media need to be added and proper copyrights #}
-                    <div class="justify-content-between d-flex">
-                        <div class="align-self-start">
-                            <span>Copyright and co</span>
-                        </div>
-                        <div>
-                            <a class="nav-link fa-brands fa-instagram fa-2xl mx-1" href=""></a>
-                            <a class="nav-link fa-brands fa-twitter fa-2xl" href=""></a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            {# footer include #}
+            {% include "_partials/_footer.html.twig" %}
         {% endblock %}
 
 
