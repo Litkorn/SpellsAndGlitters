@@ -2,8 +2,7 @@
 
 {% block body %}
 
-    {# New creation section #}
-
+    {# New creations section #}
     <section class="container text-center">
         <h1 class="my-5">Nouveautés</h1>
             <div class="row">
@@ -14,19 +13,20 @@
                         <span class="mt-2 fs-5 font-sawarabi p-md-0 pr-5">{{ creation.title }}</span>
                         <span class="position-absolute top-0 end-0">
                             {% if is_granted("ROLE_USER") %}
+                                {% set isFavorite = false %}
                                 {% for favorite in creation.favorites %}
                                     {% if favorite.id == app.user.id %}
-                                        <i class="fa-solid fa-heart fa-lg" style="color: #ffa494"></i>
-                                    {% else %}
-                                        <i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i>
+                                        {% set isFavorite = true %}
                                     {% endif %}
-                                {% else %}
-                                    <i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i>
                                 {% endfor %}
+                                {% if isFavorite %}
+                                    <a href="{{ path('remove_favorite', {id: creation.id}) }}"><i class="fa-solid fa-heart fa-lg" style="color: #ffa494"></i></a>
+                                {% else %}
+                                    <a href="{{ path('add_favorite', {id: creation.id}) }}"><i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i></a>
+                                {% endif %}
                             {% else %}
-                                <i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i>
+                                <a href="{{ path('app_login') }}"><i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i></a>
                             {% endif %}
-
                         </span>
                     </div>
                 </div>
