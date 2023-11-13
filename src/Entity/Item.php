@@ -6,6 +6,7 @@ use App\Repository\ItemRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ItemRepository::class)]
@@ -16,6 +17,7 @@ class Item
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\Length(max: 120, maxMessage: "Le titre ne peut depasser {{ limit }} caractères")]
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
@@ -34,6 +36,7 @@ class Item
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
+    #[Assert\NotBlank]
     #[ORM\ManyToOne(inversedBy: 'items')]
     private ?Category $category = null;
 

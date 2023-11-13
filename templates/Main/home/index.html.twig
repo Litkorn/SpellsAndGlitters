@@ -1,18 +1,77 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
 
-    <div class="example-wrapper">
-        <h1>Hello {{ controller_name }}! ✅</h1>
+    {# New creations section #}
+    <section class="container text-center">
+        <h1 class="my-5">Nouveautés</h1>
+            <div class="row">
+            {% for creation in creations %}
+                <div class="col-lg-3 col-md-6 col-6 h-100 fadein mb-3 text-start">
+                    <img class="card-img-top picture-home" src="{{ asset(dl_dir ~ creation.picture) }}" alt="{{creation.title}}" style="height: 300px; object-fit: cover;">
+                    <div class="position-relative">
+                        <span class="mt-2 fs-5 font-sawarabi p-md-0 pr-5">{{ creation.title }}</span>
+                        <span class="position-absolute top-0 end-0">
+                            {% if is_granted("ROLE_USER") %}
+                                {% set isFavorite = false %}
+                                {% for favorite in creation.favorites %}
+                                    {% if favorite.id == app.user.id %}
+                                        {% set isFavorite = true %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% if isFavorite %}
+                                    <a href="{{ path('remove_favorite', {id: creation.id}) }}"><i class="fa-solid fa-heart fa-lg" style="color: #ffa494"></i></a>
+                                {% else %}
+                                    <a href="{{ path('add_favorite', {id: creation.id}) }}"><i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i></a>
+                                {% endif %}
+                            {% else %}
+                                <a href="{{ path('app_login') }}"><i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i></a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="btn btn-primary home-button text-secondary mt-4 mb-5" href="{# {{ path('app_news') }} #}">Tout voir</a>
+        <hr>
+    </section>
 
-        This friendly message is coming from:
-        <ul>
-            <li>Your controller at <code><a href="{{ 'C:/Users/litko/Documents/Soutenance/SpellsGlitters/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-            <li>Your template at <code><a href="{{ 'C:/Users/litko/Documents/Soutenance/SpellsGlitters/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-        </ul>
-    </div>
+    {# "See more" section #}
+    {# TODO: Add link to creations page matching to category #}
+
+    <section class="text-center">
+        <h2 class="my-5">En voir plus</h2>
+        <div class="row mb-5">
+            <div class="col-md col-8 fadein p-0 mx-auto mb-2 position-relative">
+                <a href="">
+                    <img class="card-img-top picture-home" src="{{ asset("assets/img/crochet.jpg") }}" alt="...">
+                    <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Crochet</div>
+                </a>
+            </div>
+            <div class="col-md col-8 fadein p-0 mx-auto mb-2">
+                <a href="">
+                    <img class="card-img-top picture-home" src="{{ asset("assets/img/resine.jpg") }}" alt="...">
+                    <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Résine</div>
+                </a>
+            </div>
+            <div class="col-md col-8 fadein p-0 mx-auto mb-2">
+                <a href="">
+                    <img class="card-img-top picture-home" src="{{ asset("assets/img/peinture.jpg") }}" alt="...">
+                    <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Peinture</div>
+                </a>
+            </div>
+            <div class="col-md col-8 fadein p-0 mx-auto mb-2">
+                <a href="">
+                    <img class="card-img-top picture-home" src="{{ asset("assets/img/digital.png") }}" alt="...">
+                    <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Dessin digital</div>
+                </a>
+            </div>
+            <div class="col-md col-8 fadein p-0 mx-auto mb-2">
+                <a href="">
+                    <img class="card-img-top picture-home" src="{{ asset("assets/img/fimo.jpg") }}" alt="...">
+                    <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Argile polymère</div>
+                </a>
+            </div>
+        </div>
+    </section>
 {% endblock %}
