@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+    {# TODO: Add link to creations page matching to category; add links to creations details #}
+
 {% block body %}
 
     {# New creations section #}
@@ -20,12 +22,12 @@
                                     {% endif %}
                                 {% endfor %}
                                 {% if isFavorite %}
-                                    <a href="{{ path('remove_favorite', {id: creation.id}) }}"><i class="fa-solid fa-heart fa-lg" style="color: #ffa494"></i></a>
+                                    <a href="{{ path('app_creations_remove_favorite', {id: creation.id}) }}"><i class="fa-solid fa-heart fa-lg" style="color: #ffa494"></i></a>
                                 {% else %}
-                                    <a href="{{ path('add_favorite', {id: creation.id}) }}"><i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i></a>
+                                    <a href="{{ path('app_creations_add_favorite', {id: creation.id}) }}"><i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i></a>
                                 {% endif %}
                             {% else %}
-                                <a href="{{ path('app_login') }}"><i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i></a>
+                                <a href="{{ path('app_login') }}"><i class="fa-regular fa-heart fa-lg mr-3" style="color: #ffa494"></i></a>
                             {% endif %}
                         </span>
                     </div>
@@ -37,7 +39,6 @@
     </section>
 
     {# "See more" section #}
-    {# TODO: Add link to creations page matching to category #}
 
     <section class="text-center">
         <h2 class="my-5">En voir plus</h2>

@@ -3,23 +3,33 @@
 namespace App\Controller\Creations;
 
 use App\Entity\Item;
+use App\Repository\ItemRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+#[Route('/creations', name: 'app_creations_')]
 class CreationsController extends AbstractController
 {
-    #[Route('/creations', name: 'app_creations')]
-    public function index(): Response
+    /* Creations list (all) */
+    #[Route('/', name: 'index')]
+    public function index(ItemRepository $ItemRepo): Response
     {
-        return $this->render('creations/index.html.twig', [
+        $creations = $ItemRepo->findAll();
+
+        return $this->render('Creations/index.html.twig', [
             'controller_name'   => 'CreationsController',
-            'title'             => 'Créations'
+            'title'             => 'Créations',
+            'creations'         => $creations
         ]);
     }
 
+    /* Creation details */
+    // #[Route('/{slug}', name: 'details')]
+
+    /* Routes to handle favorites */
     #[Route('/favoris/ajout/{id}', name: 'add_favorite')]
     public function addFavoris(Item $item, EntityManagerInterface $em)
     {

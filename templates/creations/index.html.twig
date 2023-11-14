@@ -1,20 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CreationsController!{% endblock %}
+{# TODO: display count of creations; make the filters; make link to creation details #}
+
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/litko/Documents/Soutenance/SpellsGlitters/src/Controller/CreationsController.php'|file_link(0) }}">src/Controller/CreationsController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/litko/Documents/Soutenance/SpellsGlitters/templates/creations/index.html.twig'|file_link(0) }}">templates/creations/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <section class="container text-center">
+        <h1 class="my-5">Créations</h1>
+        <div class="container col-md-9">
+            <hr>
+            <span>X créations</span>
+            <span>Trier par: Dropdown</span>
+            <hr class="mb-5">
+                <div class="row">
+                {% for creation in creations %}
+                    <div class="col-lg-4 col-md-6 col-6 fadein mb-5 text-start">
+                        <img class="picture-creations mx-auto d-block" src="{{ asset(dl_dir ~ creation.picture) }}" alt="{{creation.title}}">
+                        <div class="position-relative">
+                            <div class="title-creation font-sawarabi pr-5">{{ creation.title }}</div>
+                            <span class="position-absolute top-0 end-0">
+                                {% if is_granted("ROLE_USER") %}
+                                    {% set isFavorite = false %}
+                                    {% for favorite in creation.favorites %}
+                                        {% if favorite.id == app.user.id %}
+                                            {% set isFavorite = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if isFavorite %}
+                                        <a href="{{ path('app_creations_remove_favorite', {id: creation.id}) }}"><i class="fa-solid fa-heart fa-lg mr-md-3" style="color: #ffa494"></i></a>
+                                    {% else %}
+                                        <a href="{{ path('app_creations_add_favorite', {id: creation.id}) }}"><i class="fa-regular fa-heart fa-lg mr-md-3" style="color: #ffa494"></i></a>
+                                    {% endif %}
+                                {% else %}
+                                    <a href="{{ path('app_login') }}"><i class="fa-regular fa-heart fa-lg mr-md-3" style="color: #ffa494"></i></a>
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 {% endblock %}
