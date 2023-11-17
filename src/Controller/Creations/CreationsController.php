@@ -14,14 +14,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class CreationsController extends AbstractController
 {
     /* Creations list (all) */
-    #[Route('/', name: 'index')]
+    #[Route('/all', name: 'all')]
     public function index(ItemRepository $ItemRepo): Response
     {
         $creations = $ItemRepo->findAll();
 
         return $this->render('Creations/index.html.twig', [
-            'controller_name'   => 'CreationsController',
-            'title'             => 'Créations',
             'creations'         => $creations
         ]);
     }

@@ -16,8 +16,6 @@ class HomeController extends AbstractController
 
 
         return $this->render('Main/home/index.html.twig', [
-            'controller_name'   => 'HomeController',
-            'title'             => 'Accueil | Spells and Glitters',
             'creations'         => $creations
         ]);
     }
