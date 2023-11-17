@@ -1,65 +1,72 @@
 {# we get the route to make conditionnal display in the navbar #}
 {% set route = app.request.attributes.get('_route') %}
-		{# Navigation Bar #}
-		<nav class="navbar navbar-expand-lg bg-primary py-3 h4 mb-0">
-				<div class="container col-xxl-8 p-0">
-						{# Logo with 2 variations: one for >= lg screen, one for <=md screen #}
-						<a class="navbar-brand" href="{{ path('app_home')}}">
-								<img class="d-none d-lg-block"src="{{ asset('assets/img/spellsLine2.png') }}" alt="Logo Spells & Glitters" style="max-height: 50px;">
-								<img class="d-lg-none" src="{{ asset('assets/img/spellsLine.png') }}" alt="Logo Spells & Glitters" style="max-height: 100px;">
-						</a>
-						{# burger menu icon #}
-						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon" ></span>
-						</button>
-						{# elements of our navbar that'll be in the burger menu for smaller screens #}
-						<div class="collapse navbar-collapse" id="navbarColor01">
-								<ul class="navbar-nav ml-auto">
-										<li class="nav-item">
-										<a class="nav-link {% if route == 'app_home' %} active {% endif %}" href="{{ path('app_home') }}">Acceuil
-												<span class="visually-hidden">(current)</span>
-										</a>
-										</li>
-										{# dropdown with some links #}
-										<li class="nav-item dropdown">
-												<a class="nav-link dropdown-toggle {% if route == 'app_creations' %} active {% endif %}" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" >Créations</a>
-												<div class="dropdown-menu">
-														<a class="dropdown-item" href="#">Résine</a>
-														<a class="dropdown-item" href="#">Argile Polymère</a>
-														<a class="dropdown-item" href="#">Dessin digital</a>
-														<a class="dropdown-item" href="#">Crochet</a>
-														<a class="dropdown-item" href="#">Peinture</a>
-												</div>
-										</li>
-										<li class="nav-item">
-												<a class="nav-link {% if route == 'app_news' %} active {% endif %}" href="#">Nouveautés</a>
-										</li>
-										<li class="nav-item">
-												<a class="nav-link {% if route == 'app_about' %} active {% endif %}" href="#">A propos</a>
-										</li>
-										<li class="nav-item">
-												<a class="nav-link {% if route == 'app_contact' %} active {% endif %}" href="#">Contact</a>
-										</li>
-										{# dropdown with conditionnal links #}
-										<li class="nav-item dropdown">
-												<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><span class="fas fa-user fa-lg"/></a>
-												<div class="dropdown-menu">
-												{# if user is identified #}
-												{% if app.user %}
-																{# if user is granted admin role -> display admin link #}
-																{% if is_granted('ROLE_ADMIN') %}
-																		<a class="dropdown-item bg-danger" href="{{ path('admin') }}">Administation</a></button>
-																{% endif %}
-																{# display profile and connexion links in all cases for user identified #}
-																<a class="dropdown-item" {# href="{{ path('app_profile') }}" #}>Profil</a>
-																<a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a>
-														{% else %}
-																{# display register and login links if user isn't identified #}
-																<a class="dropdown-item" href="{{ path('app_register') }}">Inscription</a>
-																<a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a>
-												{% endif %}
-										</li>
-								</ul>
-						</div>
+
+{% for label, msgs in app.flashes %}
+		{% for msg in msgs %}
+				<div class="alert alert-{{ label }} text-center w-100 m-0">{{ msg }}</div>
+		{% endfor %}
+{% endfor %}
+{# Navigation Bar #}
+<nav class="navbar navbar-expand-lg bg-primary py-3 h4 mb-0">
+		<div class="container col-xxl-8 p-0">
+				{# Logo with 2 variations: one for >= lg screen, one for <=md screen #}
+				<a class="navbar-brand" href="{{ path('app_home')}}">
+						<img class="d-none d-lg-block"src="{{ asset('assets/img/spellsLine2.png') }}" alt="Logo Spells & Glitters" style="max-height: 50px;">
+						<img class="d-lg-none" src="{{ asset('assets/img/spellsLine.png') }}" alt="Logo Spells & Glitters" style="max-height: 100px;">
+				</a>
+				{# burger menu icon #}
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon" ></span>
+				</button>
+				{# elements of our navbar that'll be in the burger menu for smaller screens #}
+				<div class="collapse navbar-collapse" id="navbarColor01">
+						<ul class="navbar-nav ml-auto">
+								<li class="nav-item">
+								<a class="nav-link {% if route == 'app_home' %} active {% endif %}" href="{{ path('app_home') }}">Acceuil
+										<span class="visually-hidden">(current)</span>
+								</a>
+								</li>
+								{# dropdown with some links #}
+								<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle {% if app.request.attributes.get('_route') starts with 'app_creations_' %} active {% endif %}" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" >Créations</a>
+										<div class="dropdown-menu">
+												<a class="dropdown-item {% if route == 'app_creations_all' %} active text-secondary {% endif %}" href="{{ path("app_creations_all") }}">Tout Voir</a>
+												<a class="dropdown-item" href="#">Résine</a>
+												<a class="dropdown-item" href="#">Argile Polymère</a>
+												<a class="dropdown-item" href="#">Dessin digital</a>
+												<a class="dropdown-item" href="#">Crochet</a>
+												<a class="dropdown-item" href="#">Peinture</a>
+										</div>
+								</li>
+								<li class="nav-item">
+										<a class="nav-link {% if route == 'app_news' %} active {% endif %}" href="#">Nouveautés</a>
+								</li>
+								<li class="nav-item">
+										<a class="nav-link {% if route == 'app_about' %} active {% endif %}" href="#">A propos</a>
+								</li>
+								<li class="nav-item">
+										<a class="nav-link {% if route == 'app_contact' %} active {% endif %}" href="#">Contact</a>
+								</li>
+								{# dropdown with conditionnal links #}
+								<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><span class="fas fa-user fa-lg"/></a>
+										<div class="dropdown-menu">
+										{# if user is identified #}
+										{% if app.user %}
+														{# if user is granted admin role -> display admin link #}
+														{% if is_granted('ROLE_ADMIN') %}
+																<a class="dropdown-item bg-danger" href="{{ path('admin') }}">Administation</a></button>
+														{% endif %}
+														{# display profile and connexion links in all cases for user identified #}
+														<a class="dropdown-item" {# href="{{ path('app_profile') }}" #}>Profil</a>
+														<a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a>
+												{% else %}
+														{# display register and login links if user isn't identified #}
+														<a class="dropdown-item {% if route == 'app_register' %} active text-secondary {% endif %}" href="{{ path('app_register') }}">Inscription</a>
+														<a class="dropdown-item {% if route == 'app_login' %} active text-secondary {% endif %}" href="{{ path('app_login') }}">Connexion</a>
+										{% endif %}
+								</li>
+						</ul>
 				</div>
-		</nav>
+		</div>
+</nav>
