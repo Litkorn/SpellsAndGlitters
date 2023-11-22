@@ -55,7 +55,7 @@
 										{% if app.user %}
 														{# if user is granted admin role -> display admin link #}
 														{% if is_granted('ROLE_ADMIN') %}
-																<a class="dropdown-item bg-danger" href="{{ path('admin') }}">Administation</a></button>
+																<a class="dropdown-item bg-danger" href="{{ path('admin') }}">Administation</a>
 														{% endif %}
 														{# display profile and connexion links in all cases for user identified #}
 														<a class="dropdown-item" {# href="{{ path('app_profile') }}" #}>Profil</a>

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/creations', name: 'app_creations_')]
 class CreationsController extends AbstractController
@@ -28,6 +29,7 @@ class CreationsController extends AbstractController
     // #[Route('/{slug}', name: 'details')]
 
     /* Routes to handle favorites */
+    #[IsGranted('IS_AUTHENTIFIED_FULLY')]
     #[Route('/favoris/ajout/{id}', name: 'add_favorite')]
     public function addFavoris(Item $item, EntityManagerInterface $em)
     {
@@ -40,6 +42,7 @@ class CreationsController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
 
+    #[IsGranted('IS_AUTHENTIFIED_FULLY')]
     #[Route('/favoris/suppression/{id}', name: 'remove_favorite')]
     public function removeFavoris(Item $item, EntityManagerInterface $em)
     {

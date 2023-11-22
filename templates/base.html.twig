@@ -10,6 +10,8 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon/favicon-16x16.png') }}">
         <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon/favicon.ico') }}" />
         <link rel="manifest" href="{{ asset('assets/favicon/site.webmanifest') }}">
+        <meta name="description" content="{% block meta_description %}{% endblock %}">
+        {# link to css from webpack encore #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -30,6 +32,7 @@
 
 
         {% block javascripts %}
+            {# link to js from webpack encore #}
             {{ encore_entry_script_tags('app') }}
             <script src="https://kit.fontawesome.com/10f34ef9b1.js" crossorigin="anonymous"></script>
             <script src="{{ asset("assets/js/cursor.js") }}"></script>
