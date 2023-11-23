@@ -29,7 +29,7 @@ class CreationsController extends AbstractController
     // #[Route('/{slug}', name: 'details')]
 
     /* Routes to handle favorites */
-    #[IsGranted('IS_AUTHENTIFIED_FULLY')]
+    #[IsGranted('ROLE_USER')]
     #[Route('/favoris/ajout/{id}', name: 'add_favorite')]
     public function addFavoris(Item $item, EntityManagerInterface $em)
     {
@@ -42,7 +42,7 @@ class CreationsController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
 
-    #[IsGranted('IS_AUTHENTIFIED_FULLY')]
+    #[IsGranted('ROLE_USER')]
     #[Route('/favoris/suppression/{id}', name: 'remove_favorite')]
     public function removeFavoris(Item $item, EntityManagerInterface $em)
     {
