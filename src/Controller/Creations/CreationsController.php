@@ -37,7 +37,7 @@ class CreationsController extends AbstractController
         $page = $request->query->getInt('page', 1);
 
         // $creations = $category->getItems();
-        $creations = $itemRepo->findCreationsPaginated($page, $slug, 4);
+        $creations = $itemRepo->findCreationsPaginated($page, $slug, 12);
 
         return $this->render('Creations/index.html.twig', [
             'creations'     => $creations,
