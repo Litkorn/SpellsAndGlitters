@@ -16,9 +16,9 @@ class CreationsController extends AbstractController
 {
     /* Creations list (all) */
     #[Route('/all', name: 'all')]
-    public function index(ItemRepository $ItemRepo): Response
+    public function index(ItemRepository $itemRepo): Response
     {
-        $creations = $ItemRepo->findAll();
+        $creations = $itemRepo->findBy(['isActive' => true], ['createdAt' => 'DESC']);
 
         return $this->render('Creations/index.html.twig', [
             'creations'         => $creations
