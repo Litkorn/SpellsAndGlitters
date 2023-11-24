@@ -22,7 +22,7 @@ class ItemRepository extends ServiceEntityRepository
         parent::__construct($registry, Item::class);
     }
 
-    /* Fonction to return creations paginated */
+    /* function to return creations paginated */
     /* page = number of the actual page, catSlug = slug of the category, limit = number max of products to find */
     public function findCreationsPaginated(int $page, string $catSlug, int $limit = 6): array
     {
@@ -34,15 +34,26 @@ class ItemRepository extends ServiceEntityRepository
         /* calcul of the first resultat that should be displayed */
         $firstResult = $page * $limit - $limit;
 
-        /* creation of the query, finding creations by the category's slug */
-        $query = $this->getEntityManager()->createQueryBuilder()
-                        ->select('c', 'creations')
-                        ->from('App\Entity\Item', 'creations')
-                        ->join('creations.category', 'c')
-                        ->where("c.slug = '$catSlug'")
-                        ->andWhere('creations.isActive = true')
-                        ->setMaxResults($limit)
-                        ->setFirstResult($firstResult);
+        /* creation of the query, finding creations by the category's slug, if slug is empty then it takes all creations */
+        if($catSlug){
+            $query = $this->getEntityManager()->createQueryBuilder()
+                            ->select('c', 'creations')
+                            ->from('App\Entity\Item', 'creations')
+                            ->join('creations.category', 'c')
+                            ->where("c.slug = '$catSlug'")
+                            ->andWhere('creations.isActive = true')
+                            ->setMaxResults($limit)
+                            ->setFirstResult($firstResult)
+                            ->orderBy('creations.createdAt', 'DESC');
+        } else {
+            $query = $this->getEntityManager()->createQueryBuilder()
+                            ->select('creations')
+                            ->from('App\Entity\Item', 'creations')
+                            ->where('creations.isActive = true')
+                            ->setMaxResults($limit)
+                            ->setFirstResult($firstResult)
+                            ->orderBy('creations.createdAt', 'DESC' );
+        }
 
         /* making the pagination */
         $paginator = new Paginator($query);
