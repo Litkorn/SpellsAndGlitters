@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Item;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Item>
@@ -19,6 +20,46 @@ class ItemRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Item::class);
+    }
+
+    /* Fonction to return creations paginated */
+    /* page = number of the actual page, catSlug = slug of the category, limit = number max of products to find */
+    public function findCreationsPaginated(int $page, string $catSlug, int $limit = 6): array
+    {
+        /* absolute value of limit to avoid error */
+        $limit = abs($limit);
+
+        $result = [];
+
+        /* calcul of the first resultat that should be displayed */
+        $firstResult = $page * $limit - $limit;
+
+        /* creation of the query, finding creations by the category's slug */
+        $query = $this->getEntityManager()->createQueryBuilder()
+                        ->select('c', 'creations')
+                        ->from('App\Entity\Item', 'creations')
+                        ->join('creations.category', 'c')
+                        ->where("c.slug = '$catSlug'")
+                        ->setMaxResults($limit)
+                        ->setFirstResult($firstResult);
+
+        /* making the pagination */
+        $paginator = new Paginator($query);
+        $data = $paginator->getQuery()->getResult();
+
+        if (empty($data))
+            return ($result);
+
+        /* calculation the number of pages */
+        $pages = ceil($paginator->count() / $limit);
+
+        /* puting datas in result */
+        $result['data'] = $data;
+        $result['pages'] = $pages;
+        $result['page'] = $page;
+        $result['limit'] = $limit;
+
+        return ($result);
     }
 
 //    /**
