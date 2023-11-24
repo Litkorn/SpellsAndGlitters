@@ -8,6 +8,7 @@
 {% block body %}
     <section class="container text-center">
         <h1 class="my-5">Créations</h1>
+        {% if creations.data is defined%}
         <div class="container col-md-9">
             <hr>
             <span>X créations</span>
@@ -43,12 +44,21 @@
                         </div>
                     </div>
                 {% endfor %}
+
             </div>
-            {% set path = 'app_creations_category' %}
-            {% set slug = slug %}
+            {# values needed for pagination links (if slug is empty, it's all creations, when it's not empty, it's creations found by category) #}
+            {% if slug %}
+                {% set path = 'app_creations_category' %}
+                {% set slug = slug %}
+            {% else %}
+                {% set path = 'app_creations_all' %}
+            {% endif %}
             {% set pages = creations.pages %}
             {% set currentPage = creations.page %}
             {% include "_partials/_pagination.html.twig" %}
         </div>
+            {% else %}
+                <h2>Désolée ! Aucune créations trouvées.</h2>
+            {% endif %}
     </section>
 {% endblock %}
