@@ -18,12 +18,17 @@ class CreationsController extends AbstractController
 {
     /* Creations list (all) */
     #[Route('/all', name: 'all')]
-    public function index(ItemRepository $itemRepo): Response
+    public function index(ItemRepository $itemRepo, Request $request): Response
     {
-        $creations = $itemRepo->findBy(['isActive' => true], ['createdAt' => 'DESC']);
+        /* finding number of the page in the url */
+        $page = $request->query->getInt('page', 1);
 
+        $creations = $itemRepo->findCreationsPaginated($page, "", 12);
+
+        /* send slug empty so the vue knows wich path to set */
         return $this->render('Creations/index.html.twig', [
-            'creations'         => $creations
+            'creations'         => $creations,
+            'slug'              => ""
         ]);
     }
 
@@ -33,10 +38,9 @@ class CreationsController extends AbstractController
     {
         $slug = $category->getSlug();
 
-        /* finding page number in the url */
+        /* finding number of the page in the url */
         $page = $request->query->getInt('page', 1);
 
-        // $creations = $category->getItems();
         $creations = $itemRepo->findCreationsPaginated($page, $slug, 12);
 
         return $this->render('Creations/index.html.twig', [
