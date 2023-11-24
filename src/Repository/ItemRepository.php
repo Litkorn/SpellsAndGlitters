@@ -40,6 +40,7 @@ class ItemRepository extends ServiceEntityRepository
                         ->from('App\Entity\Item', 'creations')
                         ->join('creations.category', 'c')
                         ->where("c.slug = '$catSlug'")
+                        ->andWhere('creations.isActive = true')
                         ->setMaxResults($limit)
                         ->setFirstResult($firstResult);
 
