@@ -24,7 +24,6 @@ class CreationsController extends AbstractController
         $page = $request->query->getInt('page', 1);
 
         $creations = $itemRepo->findCreationsPaginated($page, "", 12);
-
         /* send slug empty so the vue knows wich path to set */
         return $this->render('Creations/index.html.twig', [
             'creations'         => $creations,
