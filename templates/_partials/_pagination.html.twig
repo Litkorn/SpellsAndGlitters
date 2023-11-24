@@ -1,16 +1,24 @@
+{# where "slug ?" -> if slug is empty then it isn't passed in the url, if it isn't, it is passed #}
+
+{# pagination displayed only if it has more than 1 page #}
 {% if pages > 1 %}
   <nav>
     <ul class="pagination mx-auto justify-content-center">
+      {# disabling arrow button if current page is the first one #}
       <li class="page-item {% if currentPage <= 1%} disabled {% endif %}">
-        <a class="page-link" href="{{ path(path, {slug: slug, page: currentPage - 1}) }}">&laquo;</a>
+        {# link to previous page #}
+        <a class="page-link" href="{{ slug ? path(path, {slug: slug, page: currentPage - 1}) : path(path, {page: currentPage - 1}) }}">&laquo;</a>
       </li>
       {% for page in 1..pages %}
         <li class="page-item">
-          <a class="page-link text-secondary {% if currentPage == page %} active text-white {% endif %}" href="{{ path(path, {slug: slug, page: page}) }}">{{ page }}</a>
+          {# link to a page #}
+          <a class="page-link text-secondary {% if currentPage == page %} active text-white {% endif %}" href="{{ slug ? path(path, {slug: slug, page: page}) : path(path, {page: page}) }}">{{ page }}</a>
         </li>
       {% endfor %}
+      {# disabling arrow button if the current page is the last one #}
       <li class="page-item {% if currentPage >= pages %} disabled {% endif %}">
-        <a class="page-link" href="{{ path(path, {slug: slug, page: currentPage + 1}) }}">&raquo;</a>
+        {# link to next page #}
+        <a class="page-link" href="{{ slug ? path(path, {slug: slug, page: currentPage + 1}) : path(path, {page: currentPage + 1}) }}">&raquo;</a>
       </li>
     </ul>
   </nav>
