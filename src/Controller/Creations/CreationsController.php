@@ -3,13 +3,15 @@
 namespace App\Controller\Creations;
 
 use App\Entity\Item;
+use App\Entity\Category;
 use App\Repository\ItemRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/creations', name: 'app_creations_')]
 class CreationsController extends AbstractController
@@ -25,8 +27,23 @@ class CreationsController extends AbstractController
         ]);
     }
 
-    /* Creation details */
-    // #[Route('/{slug}', name: 'details')]
+    /* Creation list (by Category) */
+    #[Route('/{slug}', name: 'category')]
+    public function indexCategory(Category $category, ItemRepository $itemRepo, Request $request)
+    {
+        $slug = $category->getSlug();
+
+        /* finding page number in the url */
+        $page = $request->query->getInt('page', 1);
+
+        // $creations = $category->getItems();
+        $creations = $itemRepo->findCreationsPaginated($page, $slug, 4);
+
+        return $this->render('Creations/index.html.twig', [
+            'creations'     => $creations,
+            'slug'          => $slug
+        ]);
+    }
 
     /* Routes to handle favorites */
     #[IsGranted('ROLE_USER')]
