@@ -13,8 +13,8 @@
             <span>X créations</span>
             <span>Trier par: Dropdown</span>
             <hr class="mb-5">
-                <div class="row">
-                {% for creation in creations %}
+            <div class="row">
+                {% for creation in creations.data %}
                     <div class="col-lg-4 col-md-6 col-6 fadein mb-5 text-start">
                         <img class="picture-creations mx-auto d-block" src="{{ asset(dl_dir ~ creation.picture) }}" alt="{{creation.title}}">
                         <div class="position-relative">
@@ -44,6 +44,11 @@
                     </div>
                 {% endfor %}
             </div>
+            {% set path = 'app_creations_category' %}
+            {% set slug = slug %}
+            {% set pages = creations.pages %}
+            {% set currentPage = creations.page %}
+            {% include "_partials/_pagination.html.twig" %}
         </div>
     </section>
 {% endblock %}
