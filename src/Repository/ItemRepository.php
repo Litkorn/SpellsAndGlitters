@@ -24,8 +24,19 @@ class ItemRepository extends ServiceEntityRepository
 
     /* function to return creations paginated */
     /* page = number of the actual page, catSlug = slug of the category, limit = number max of products to find */
-    public function findCreationsPaginated(int $page, string $catSlug, int $limit = 6): array
+    public function findCreationsPaginated(int $page, string $catSlug, int $limit = 6, string $orderType, string $order): array
     {
+        if($orderType == "alpha"){
+            $ordType = "creations.title";
+        } else {
+            $ordType = "creations.createdAt";
+        }
+        if($order == "asc"){
+            $ord = "ASC";
+        } else {
+            $ord = "DESC";
+        }
+
         /* absolute value of limit to avoid error */
         $limit = abs($limit);
 
@@ -44,7 +55,7 @@ class ItemRepository extends ServiceEntityRepository
                             ->andWhere('creations.isActive = true')
                             ->setMaxResults($limit)
                             ->setFirstResult($firstResult)
-                            ->orderBy('creations.createdAt', 'DESC');
+                            ->orderBy($ordType, $ord);
         } else {
             $query = $this->getEntityManager()->createQueryBuilder()
                             ->select('creations')
@@ -52,7 +63,7 @@ class ItemRepository extends ServiceEntityRepository
                             ->where('creations.isActive = true')
                             ->setMaxResults($limit)
                             ->setFirstResult($firstResult)
-                            ->orderBy('creations.createdAt', 'DESC' );
+                            ->orderBy($ordType, $ord );
         }
 
         /* making the pagination */
@@ -70,6 +81,7 @@ class ItemRepository extends ServiceEntityRepository
         $result['pages'] = $pages;
         $result['page'] = $page;
         $result['limit'] = $limit;
+        $result['order'] = $orderType . '_' . $order;
 
         return ($result);
     }

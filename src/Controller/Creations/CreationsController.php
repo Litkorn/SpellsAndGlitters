@@ -22,8 +22,10 @@ class CreationsController extends AbstractController
     {
         /* finding number of the page in the url */
         $page = $request->query->getInt('page', 1);
+        $order = $request->query->getString('order', 'desc');
+        $orderType = $request->query->getString('orderType', 'date');
 
-        $creations = $itemRepo->findCreationsPaginated($page, "", 9);
+        $creations = $itemRepo->findCreationsPaginated($page, "", 9, $orderType, $order);
         /* send slug empty so the vue knows wich path to set */
         return $this->render('Creations/index.html.twig', [
             'creations'         => $creations,
@@ -41,8 +43,10 @@ class CreationsController extends AbstractController
 
         /* finding number of the page in the url */
         $page = $request->query->getInt('page', 1);
+        $order = $request->query->getString('order', 'desc');
+        $orderType = $request->query->getString('orderType', 'date');
 
-        $creations = $itemRepo->findCreationsPaginated($page, $slug, 9);
+        $creations = $itemRepo->findCreationsPaginated($page, $slug, 9, $orderType, $order);
 
         return $this->render('Creations/index.html.twig', [
             'creations'     => $creations,

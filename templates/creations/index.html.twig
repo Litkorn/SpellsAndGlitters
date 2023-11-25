@@ -6,13 +6,35 @@
 
 
 {% block body %}
+    {# values needed for pagination links (if slug is empty, it's all creations, when it's not empty, it's creations found by category) #}
+    {% if slug %}
+        {% set path = 'app_creations_category' %}
+        {% set slug = slug %}
+    {% else %}
+        {% set path = 'app_creations_all' %}
+    {% endif %}
+    {% set pages = creations.pages %}
+    {% set currentPage = creations.page %}
+    {% set order = creations.order %}
     <section class="container text-center">
         <h1 class="my-5">{{title}}</h1>
         {% if creations.data is defined %}
         <div class="container col-md-9">
             <hr>
-            <span>X créations</span>
-            <span>Trier par: Dropdown</span>
+            <nav class="navbar">
+                <span>X créations</span>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" >Trier par</a>
+                        <div class="dropdown-menu dropdown-menu-end position-absolute">
+                                <a class="dropdown-item {% if order == "date_desc" %} active text-secondary {% endif %}" href="{{ slug ? path(path, {slug: slug, orderType: 'date', order: 'desc'}) : path(path, {orderType: 'date', order: 'desc'}) }}">Date: récent</a>
+                                <a class="dropdown-item {% if order == "date_asc" %} active text-secondary {% endif %}" href="{{ slug ? path(path, {slug: slug, orderType: 'date', order: 'asc'}) : path(path, {orderType: 'date', order: 'asc'}) }}">Date: ancien</a>
+                                <a class="dropdown-item {% if order == "alpha_asc" %} active text-secondary {% endif %}" href="{{ slug ? path(path, {slug: slug, orderType: 'alpha', order: 'asc'}) : path(path, {orderType: 'alpha', order: 'asc'}) }}">Alpha: Croissant</a>
+                                <a class="dropdown-item {% if order == "alpha_desc" %} active text-secondary {% endif %}" href="{{ slug ? path(path, {slug: slug, orderType: 'alpha', order: 'desc'}) : path(path, {orderType: 'alpha', order: 'desc'}) }}">Alpha: Décroissant</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
             <hr class="mb-5">
             <div class="row">
                 {% for creation in creations.data %}
@@ -46,15 +68,6 @@
                 {% endfor %}
 
             </div>
-            {# values needed for pagination links (if slug is empty, it's all creations, when it's not empty, it's creations found by category) #}
-            {% if slug %}
-                {% set path = 'app_creations_category' %}
-                {% set slug = slug %}
-            {% else %}
-                {% set path = 'app_creations_all' %}
-            {% endif %}
-            {% set pages = creations.pages %}
-            {% set currentPage = creations.page %}
             {% include "_partials/_pagination.html.twig" %}
         </div>
             {% else %}
