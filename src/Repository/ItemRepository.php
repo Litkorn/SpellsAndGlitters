@@ -26,6 +26,7 @@ class ItemRepository extends ServiceEntityRepository
     /* page = number of the actual page, catSlug = slug of the category, limit = number max of products to find */
     public function findCreationsPaginated(int $page, string $catSlug, int $limit = 6, string $orderType, string $order): array
     {
+        /* setting the right values for the query */
         if($orderType == "alpha"){
             $ordType = "creations.title";
         } else {
@@ -73,8 +74,10 @@ class ItemRepository extends ServiceEntityRepository
         if (empty($data))
             return ($result);
 
-        /* calculation the number of pages */
-        $pages = ceil($paginator->count() / $limit);
+        $totalCreations = $paginator->count();
+
+        /* calcul of the number of pages */
+        $pages = ceil($totalCreations / $limit);
 
         /* puting datas in result */
         $result['data'] = $data;
@@ -82,6 +85,7 @@ class ItemRepository extends ServiceEntityRepository
         $result['page'] = $page;
         $result['limit'] = $limit;
         $result['order'] = $orderType . '_' . $order;
+        $result['totalCreations'] = $totalCreations;
 
         return ($result);
     }

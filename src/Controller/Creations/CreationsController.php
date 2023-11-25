@@ -22,6 +22,7 @@ class CreationsController extends AbstractController
     {
         /* finding number of the page in the url */
         $page = $request->query->getInt('page', 1);
+        /* finding order and orderType to sort the creations */
         $order = $request->query->getString('order', 'desc');
         $orderType = $request->query->getString('orderType', 'date');
 
@@ -43,6 +44,7 @@ class CreationsController extends AbstractController
 
         /* finding number of the page in the url */
         $page = $request->query->getInt('page', 1);
+        /* finding order and orderType to sort the creations */
         $order = $request->query->getString('order', 'desc');
         $orderType = $request->query->getString('orderType', 'date');
 
