@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Créations{% endblock %}
+{% block title %}{{title}} | Spells and Glitters{% endblock %}
 
 {# TODO: display count of creations; make the filters; make link to creation details #}
 
 
 {% block body %}
     <section class="container text-center">
-        <h1 class="my-5">Créations</h1>
+        <h1 class="my-5">{{title}}</h1>
         {% if creations.data is defined %}
         <div class="container col-md-9">
             <hr>
