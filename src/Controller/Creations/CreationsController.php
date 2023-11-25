@@ -23,11 +23,12 @@ class CreationsController extends AbstractController
         /* finding number of the page in the url */
         $page = $request->query->getInt('page', 1);
 
-        $creations = $itemRepo->findCreationsPaginated($page, "", 12);
+        $creations = $itemRepo->findCreationsPaginated($page, "", 9);
         /* send slug empty so the vue knows wich path to set */
         return $this->render('Creations/index.html.twig', [
             'creations'         => $creations,
-            'slug'              => ""
+            'slug'              => "",
+            'title'             => 'Toutes mes créations'
         ]);
     }
 
@@ -36,42 +37,46 @@ class CreationsController extends AbstractController
     public function indexCategory(Category $category, ItemRepository $itemRepo, Request $request)
     {
         $slug = $category->getSlug();
+        $title = $category->getTitle();
 
         /* finding number of the page in the url */
         $page = $request->query->getInt('page', 1);
 
-        $creations = $itemRepo->findCreationsPaginated($page, $slug, 12);
+        $creations = $itemRepo->findCreationsPaginated($page, $slug, 9);
 
         return $this->render('Creations/index.html.twig', [
             'creations'     => $creations,
-            'slug'          => $slug
+            'slug'          => $slug,
+            'title'         => $title
         ]);
     }
 
     /* Routes to handle favorites */
     #[IsGranted('ROLE_USER')]
     #[Route('/favoris/ajout/{id}', name: 'add_favorite')]
-    public function addFavoris(Item $item, EntityManagerInterface $em)
+    public function addFavoris(Item $item, EntityManagerInterface $em, Request $request)
     {
         if(!$item){
             throw new NotFoundHttpException('Pas de création trouvée');
         }
+        $route = $request->headers->get('referer');
         $item->addFavorite($this->getUser());
         $em->persist($item);
         $em->flush();
-        return $this->redirectToRoute('app_home');
+        return $this->redirect($route);
     }
 
     #[IsGranted('ROLE_USER')]
     #[Route('/favoris/suppression/{id}', name: 'remove_favorite')]
-    public function removeFavoris(Item $item, EntityManagerInterface $em)
+    public function removeFavoris(Item $item, EntityManagerInterface $em, Request $request)
     {
         if(!$item){
             throw new NotFoundHttpException('Pas de création trouvée');
         }
+        $route = $request->headers->get('referer');
         $item->removeFavorite($this->getUser());
         $em->persist($item);
         $em->flush();
-        return $this->redirectToRoute('app_home');
+        return $this->redirect($route);
     }
 }
