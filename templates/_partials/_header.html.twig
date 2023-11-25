@@ -29,7 +29,7 @@
 								{# dropdown with some links #}
 								<li class="nav-item dropdown">
 										<a class="nav-link dropdown-toggle {% if app.request.attributes.get('_route') starts with 'app_creations_' %} active {% endif %}" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" >Créations</a>
-										<div class="dropdown-menu">
+										<div class="dropdown-menu dropdown-menu-end">
 												<a class="dropdown-item {% if route == 'app_creations_all' %} active text-secondary {% endif %}" href="{{ path("app_creations_all") }}">Tout Voir</a>
 												<a class="dropdown-item {% if slug is defined and slug == 'resine' %} active text-secondary {% endif %}" href="{{ path('app_creations_category', {slug: "resine"}) }}">Résine</a>
 												<a class="dropdown-item {% if slug is defined and slug == 'fimo' %} active text-secondary {% endif %}" href="{{ path('app_creations_category', {slug: "fimo"}) }}">Argile Polymère</a>
@@ -50,7 +50,7 @@
 								{# dropdown with conditionnal links #}
 								<li class="nav-item dropdown">
 										<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><span class="fas fa-user fa-lg"/></a>
-										<div class="dropdown-menu">
+										<div class="dropdown-menu dropdown-menu-end">
 										{# if user is identified #}
 										{% if app.user %}
 														{# if user is granted admin role -> display admin link #}
