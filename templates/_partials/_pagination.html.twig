@@ -3,7 +3,7 @@
 {# pagination displayed only if it has more than 1 page #}
 {% if pages > 1 %}
   <nav>
-    <ul class="pagination mx-auto justify-content-center">
+    <ul class="pagination mx-auto my-5 justify-content-center">
       {# disabling arrow button if current page is the first one #}
       <li class="page-item {% if currentPage <= 1%} disabled {% endif %}">
         {# link to previous page #}
