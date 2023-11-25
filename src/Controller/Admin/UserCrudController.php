@@ -51,7 +51,7 @@ class UserCrudController extends AbstractCrudController
             TextField::new('lastname'),
             TextField::new('name'),
             TextField::new('password', 'Mot de passe')->setFormType(PasswordType::class)->onlyWhenCreating(),
-            CollectionField::new('roles')->setTemplatePath('/admin/fields/roles.html.twig'),
+            CollectionField::new('roles')->setTemplatePath('/Admin/fields/roles.html.twig'),
             DateTimeField::new('createdAt')->setFormat('d/M/Y')->hideOnForm(),
         ];
     }

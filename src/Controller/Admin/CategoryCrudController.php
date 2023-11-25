@@ -43,7 +43,7 @@ class CategoryCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('title'),
             DateTimeField::new('createdAt')->setFormat('d/M/Y à H:m:s')->hideOnForm(),
-            CollectionField::new('items')->setTemplatePath('/admin/fields/items.html.twig')->onlyOnIndex(),
+            CollectionField::new('items')->setTemplatePath('/Admin/fields/items.html.twig')->onlyOnIndex(),
             SlugField::new('slug')->setTargetFieldName('title')->hideOnIndex()
         ];
     }
