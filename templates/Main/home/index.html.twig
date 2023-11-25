@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} Accueil | Spells and Glitters{% endblock %}
+{% block meta_description %}Spells and Glitters, c'est la découverte d'un univers créatif inspiré du fantastique et coloré.{% endblock %}
+
+    {# TODO: Add link to creations page matching to category; add links to creations details #}
+
 {% block body %}
 
     {# New creations section #}
@@ -10,20 +15,24 @@
                 <div class="col-lg-3 col-md-6 col-6 h-100 fadein mb-3 text-start">
                     <img class="card-img-top picture-home" src="{{ asset(dl_dir ~ creation.picture) }}" alt="{{creation.title}}" style="height: 300px; object-fit: cover;">
                     <div class="position-relative">
-                        <span class="mt-2 fs-5 font-sawarabi p-md-0 pr-5">{{ creation.title }}</span>
+                        <div class="mt-2 fs-5 font-sawarabi p-md-0 pr-4">{{ creation.title }}</div>
                         <span class="position-absolute top-0 end-0">
-                            {% if is_granted("ROLE_USER") %}
+                            {# Verify if user is identified #}
+                            {% if app.user and is_granted("ROLE_USER") %}
                                 {% set isFavorite = false %}
                                 {% for favorite in creation.favorites %}
                                     {% if favorite.id == app.user.id %}
+                                    {# if a creation's favorite's id == user's id, set isFavorite == true #}
                                         {% set isFavorite = true %}
                                     {% endif %}
                                 {% endfor %}
+                                {# displays heart icon accordingly if isFavorite is true or false #}
                                 {% if isFavorite %}
-                                    <a href="{{ path('remove_favorite', {id: creation.id}) }}"><i class="fa-solid fa-heart fa-lg" style="color: #ffa494"></i></a>
+                                    <a href="{{ path('app_creations_remove_favorite', {id: creation.id}) }}"><i class="fa-solid fa-heart fa-lg" style="color: #ffa494"></i></a>
                                 {% else %}
-                                    <a href="{{ path('add_favorite', {id: creation.id}) }}"><i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i></a>
+                                    <a href="{{ path('app_creations_add_favorite', {id: creation.id}) }}"><i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i></a>
                                 {% endif %}
+                            {# diplays en empty heart if user isn't identified #}
                             {% else %}
                                 <a href="{{ path('app_login') }}"><i class="fa-regular fa-heart fa-lg" style="color: #ffa494"></i></a>
                             {% endif %}
@@ -37,37 +46,36 @@
     </section>
 
     {# "See more" section #}
-    {# TODO: Add link to creations page matching to category #}
 
     <section class="text-center">
         <h2 class="my-5">En voir plus</h2>
         <div class="row mb-5">
             <div class="col-md col-8 fadein p-0 mx-auto mb-2 position-relative">
-                <a href="">
+                <a href="{{ path('app_creations_category', {slug: "crochet"}) }}">
                     <img class="card-img-top picture-home" src="{{ asset("assets/img/crochet.jpg") }}" alt="...">
                     <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Crochet</div>
                 </a>
             </div>
             <div class="col-md col-8 fadein p-0 mx-auto mb-2">
-                <a href="">
+                <a href="{{ path('app_creations_category', {slug: "resine"}) }}">
                     <img class="card-img-top picture-home" src="{{ asset("assets/img/resine.jpg") }}" alt="...">
                     <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Résine</div>
                 </a>
             </div>
             <div class="col-md col-8 fadein p-0 mx-auto mb-2">
-                <a href="">
+                <a href="{{ path('app_creations_category', {slug: "peinture"}) }}">
                     <img class="card-img-top picture-home" src="{{ asset("assets/img/peinture.jpg") }}" alt="...">
                     <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Peinture</div>
                 </a>
             </div>
             <div class="col-md col-8 fadein p-0 mx-auto mb-2">
-                <a href="">
+                <a href="{{ path('app_creations_category', {slug: "digital"}) }}">
                     <img class="card-img-top picture-home" src="{{ asset("assets/img/digital.png") }}" alt="...">
                     <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Dessin digital</div>
                 </a>
             </div>
             <div class="col-md col-8 fadein p-0 mx-auto mb-2">
-                <a href="">
+                <a href="{{ path('app_creations_category', {slug: "fimo"}) }}">
                     <img class="card-img-top picture-home" src="{{ asset("assets/img/fimo.jpg") }}" alt="...">
                     <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Argile polymère</div>
                 </a>

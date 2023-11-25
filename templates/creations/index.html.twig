@@ -1,20 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CreationsController!{% endblock %}
+{% block title %}{{title}} | Spells and Glitters{% endblock %}
+
+{# TODO: display count of creations; make the filters; make link to creation details #}
+
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {# values needed for pagination links (if slug is empty, it's all creations, when it's not empty, it's creations found by category) #}
+    {% if slug %}
+        {% set path = 'app_creations_category' %}
+        {% set slug = slug %}
+    {% else %}
+        {% set path = 'app_creations_all' %}
+    {% endif %}
+    {% set pages = creations.pages %}
+    {% set currentPage = creations.page %}
+    {% set order = creations.order %}
+    <section class="container text-center">
+        <h1 class="my-5">{{title}}</h1>
+        {% if creations.data is defined %}
+        <div class="container col-md-9">
+            <hr>
+            <nav class="navbar">
+                <span>{{creations.totalCreations}} créations</span>
+                {# sorting button, gives order (asc/desc) and orderType (alpha/date) #}
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" >Trier par</a>
+                        <div class="dropdown-menu dropdown-menu-end position-absolute">
+                                <a class="dropdown-item {% if order == "date_desc" %} active text-secondary {% endif %}" href="{{ slug ? path(path, {slug: slug, orderType: 'date', order: 'desc'}) : path(path, {orderType: 'date', order: 'desc'}) }}">Date: récent</a>
+                                <a class="dropdown-item {% if order == "date_asc" %} active text-secondary {% endif %}" href="{{ slug ? path(path, {slug: slug, orderType: 'date', order: 'asc'}) : path(path, {orderType: 'date', order: 'asc'}) }}">Date: ancien</a>
+                                <a class="dropdown-item {% if order == "alpha_asc" %} active text-secondary {% endif %}" href="{{ slug ? path(path, {slug: slug, orderType: 'alpha', order: 'asc'}) : path(path, {orderType: 'alpha', order: 'asc'}) }}">Alpha: Croissant</a>
+                                <a class="dropdown-item {% if order == "alpha_desc" %} active text-secondary {% endif %}" href="{{ slug ? path(path, {slug: slug, orderType: 'alpha', order: 'desc'}) : path(path, {orderType: 'alpha', order: 'desc'}) }}">Alpha: Décroissant</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <hr class="mb-5">
+            <div class="row">
+                {% for creation in creations.data %}
+                    <div class="col-lg-4 col-md-6 col-6 fadein mb-5 text-start">
+                        <img class="picture-creations mx-auto d-block" src="{{ asset(dl_dir ~ creation.picture) }}" alt="{{creation.title}}">
+                        <div class="position-relative">
+                            <div class="title-creation font-sawarabi pr-5">{{ creation.title }}</div>
+                            <span class="position-absolute top-0 end-0">
+                                {# Verify if user is identified #}
+                                {% if app.user and is_granted("ROLE_USER") %}
+                                    {% set isFavorite = false %}
+                                    {% for favorite in creation.favorites %}
+                                        {% if favorite.id == app.user.id %}
+                                        {# if a creation's favorite's id == user's id, set isFavorite == true #}
+                                            {% set isFavorite = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {# displays heart icon accordingly if isFavorite is true or false #}
+                                    {% if isFavorite %}
+                                        <a href="{{ path('app_creations_remove_favorite', {id: creation.id}) }}"><i class="fa-solid fa-heart fa-lg mr-md-3" style="color: #ffa494"></i></a>
+                                    {% else %}
+                                        <a href="{{ path('app_creations_add_favorite', {id: creation.id}) }}"><i class="fa-regular fa-heart fa-lg mr-md-3" style="color: #ffa494"></i></a>
+                                    {% endif %}
+                                {# diplays en empty heart if user isn't identified #}
+                                {% else %}
+                                    <a href="{{ path('app_login') }}"><i class="fa-regular fa-heart fa-lg mr-md-3" style="color: #ffa494"></i></a>
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                {% endfor %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/litko/Documents/Soutenance/SpellsGlitters/src/Controller/CreationsController.php'|file_link(0) }}">src/Controller/CreationsController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/litko/Documents/Soutenance/SpellsGlitters/templates/creations/index.html.twig'|file_link(0) }}">templates/creations/index.html.twig</a></code></li>
-    </ul>
-</div>
+            </div>
+            {% include "_partials/_pagination.html.twig" %}
+        </div>
+            {% else %}
+                <h2>Désolée ! Aucune créations trouvées.</h2>
+            {% endif %}
+    </section>
 {% endblock %}

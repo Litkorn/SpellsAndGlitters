@@ -9,15 +9,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function index(ItemRepository $itemRepo): Response
     {
-        $creations = $itemRepo->findBy([], ['createdAt' => 'DESC'], 4);
+        $creations = $itemRepo->findBy(['isActive' => true], ['createdAt' => 'DESC'], 4);
 
 
         return $this->render('Main/home/index.html.twig', [
-            'controller_name'   => 'HomeController',
-            'title'             => 'Accueil | Spells and Glitters',
             'creations'         => $creations
         ]);
     }

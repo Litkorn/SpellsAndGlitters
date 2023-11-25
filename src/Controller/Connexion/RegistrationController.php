@@ -52,14 +52,13 @@ class RegistrationController extends AbstractController
                     ->subject('Veuillez confirmer votre email.')
                     ->htmlTemplate('Admin/registration/confirmation_email.html.twig')
             );
-            // do anything else you need here, like send an email
 
+            $this->addFlash('success', 'Inscription réussie.');
             return $this->redirectToRoute('app_login');
         }
 
         return $this->render('Admin/registration/register.html.twig', [
-            'registrationForm'  => $form->createView(),
-            'title'             => 'Inscription | Spells and Glitters'
+            'registrationForm'  => $form->createView()
         ]);
     }
 

@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Connexion | Spells and Glitters{% endblock %}
+
 {% block body %}
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -11,8 +13,8 @@
         <div class="container-fluid col-10 col-md-4 my-3 text-center">
             <span>Vous êtes connecté(e) avec l'email: {{ app.user.userIdentifier }}</span>
             <div class="d-flex">
-                <button class="btn btn-primary mt-3 d-block ml-auto mr-1 text-secondary" href="{{ path('app_home') }}">Accueil</button>
-                <button class="btn btn-secondary mt-3 d-block mr-auto ml-1" href="{{ path('app_logout') }}">Se deconnecter</button>
+                <a class="btn btn-primary mt-3 d-block ml-auto mr-1 text-secondary" href="{{ path('app_home') }}">Accueil</a>
+                <a class="btn btn-secondary mt-3 d-block mr-auto ml-1" href="{{ path('app_logout') }}">Se déconnecter</a>
             </div>
         </div>
         {% else %}
