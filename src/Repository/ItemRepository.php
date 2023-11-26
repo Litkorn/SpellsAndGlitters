@@ -24,7 +24,7 @@ class ItemRepository extends ServiceEntityRepository
 
     /* function to return creations paginated */
     /* page = number of the actual page, catSlug = slug of the category, limit = number max of products to find */
-    public function findCreationsPaginated(int $page, string $catSlug, int $limit = 6, string $orderType, string $order): array
+    public function findCreationsPaginated(int $page, string $catSlug, string $orderType, string $order, int $limit = 6): array
     {
         /* setting the right values for the query */
         if($orderType == "alpha"){
