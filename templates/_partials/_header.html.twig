@@ -31,6 +31,7 @@
 										<a class="nav-link dropdown-toggle {% if app.request.attributes.get('_route') starts with 'app_creations_' %} active {% endif %}" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" >Créations</a>
 										<div class="dropdown-menu dropdown-menu-end">
 												<a class="dropdown-item {% if route == 'app_creations_all' %} active text-secondary {% endif %}" href="{{ path("app_creations_all") }}">Tout Voir</a>
+												<a class="dropdown-item {% if route == 'app_creations_new' %} active text-secondary {% endif %}" href="{{ path('app_creations_new') }}">Nouveautés</a>
 												<a class="dropdown-item {% if slug is defined and slug == 'resine' %} active text-secondary {% endif %}" href="{{ path('app_creations_category', {slug: "resine"}) }}">Résine</a>
 												<a class="dropdown-item {% if slug is defined and slug == 'fimo' %} active text-secondary {% endif %}" href="{{ path('app_creations_category', {slug: "fimo"}) }}">Argile Polymère</a>
 												<a class="dropdown-item {% if slug is defined and slug == 'digital' %} active text-secondary {% endif %}" href="{{ path('app_creations_category', {slug: "digital"}) }}">Dessin digital</a>
