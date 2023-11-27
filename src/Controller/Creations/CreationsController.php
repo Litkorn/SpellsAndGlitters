@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 #[Route('/creations', name: 'app_creations_')]
@@ -38,7 +37,7 @@ class CreationsController extends AbstractController
 
     /* Creation list (by Category) */
     #[Route('/category/{slug}', name: 'category')]
-    public function indexCategory($slug, Category $category, ItemRepository $itemRepo, Request $request)
+    public function indexCategory(Category $category, ItemRepository $itemRepo, Request $request)
     {
         $slug = $category->getSlug();
         $title = $category->getTitle();
@@ -58,6 +57,7 @@ class CreationsController extends AbstractController
         ]);
     }
 
+    /* New creations list */
     #[Route('/new', name: 'new')]
     public function indexNew(ItemRepository $itemRepo, Request $request)
     {
@@ -69,14 +69,26 @@ class CreationsController extends AbstractController
 
         $creations = $itemRepo->findCreationsPaginated($page, "", $orderType, $order, 9, true);
 
-
-
         return $this->render('Creations/index.html.twig', [
             'creations'         => $creations,
             'slug'              => "",
             'title'             => 'Mes dernières créations',
             'new'               => true
         ]);
+    }
+
+    /* Creations Details */
+    #[Route('/details/{id}', name: 'details')]
+    public function showCreation(Item $creation = null, Request $request)
+    {
+        $route = $request->headers->get('referer');
+        if($creation == null){
+            return $this->redirectToRoute('app_creations_new');
+        } else {
+            return $this->render('Creations/show.html.twig', [
+                'creation' => $creation
+            ]);
+        }
     }
 
     /* Routes to handle favorites */
