@@ -43,6 +43,9 @@ class Item
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'items')]
     private Collection $favorites;
 
+    #[ORM\Column]
+    private ?bool $isNew = null;
+
     public function __construct()
     {
         $this->favorites = new ArrayCollection();
@@ -164,5 +167,17 @@ class Item
     public function __tostring()
     {
         return $this->title;
+    }
+
+    public function isIsNew(): ?bool
+    {
+        return $this->isNew;
+    }
+
+    public function setIsNew(bool $isNew): static
+    {
+        $this->isNew = $isNew;
+
+        return $this;
     }
 }
