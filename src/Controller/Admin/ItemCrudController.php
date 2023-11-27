@@ -47,6 +47,7 @@ class ItemCrudController extends AbstractCrudController
             TextEditorField::new('description'),
             ImageField::new('picture')->setBasePath('assets/uploads')->setUploadDir('public/assets/uploads')->setUploadedFileNamePattern('[slug]'),
             BooleanField::new('isActive'),
+            BooleanField::new('isNew'),
             DateTimeField::new('createdAt')->setFormat('d/M/Y')->hideOnForm(),
             AssociationField::new('category'),
             SlugField::new('slug')->setTargetFieldName('title')->hideOnIndex()
