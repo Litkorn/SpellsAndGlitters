@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 #[Route('/creations', name: 'app_creations_')]
@@ -26,7 +27,7 @@ class CreationsController extends AbstractController
         $order = $request->query->getString('order', 'desc');
         $orderType = $request->query->getString('orderType', 'date');
 
-        $creations = $itemRepo->findCreationsPaginated($page, "", 9, $orderType, $order);
+        $creations = $itemRepo->findCreationsPaginated($page, "", $orderType, $order, 9);
         /* send slug empty so the vue knows wich path to set */
         return $this->render('Creations/index.html.twig', [
             'creations'         => $creations,
@@ -36,8 +37,8 @@ class CreationsController extends AbstractController
     }
 
     /* Creation list (by Category) */
-    #[Route('/{slug}', name: 'category')]
-    public function indexCategory(Category $category, ItemRepository $itemRepo, Request $request)
+    #[Route('/category/{slug}', name: 'category')]
+    public function indexCategory($slug, Category $category, ItemRepository $itemRepo, Request $request)
     {
         $slug = $category->getSlug();
         $title = $category->getTitle();
@@ -48,12 +49,33 @@ class CreationsController extends AbstractController
         $order = $request->query->getString('order', 'desc');
         $orderType = $request->query->getString('orderType', 'date');
 
-        $creations = $itemRepo->findCreationsPaginated($page, $slug, 9, $orderType, $order);
+        $creations = $itemRepo->findCreationsPaginated($page, $slug, $orderType, $order, 9, false);
 
         return $this->render('Creations/index.html.twig', [
             'creations'     => $creations,
             'slug'          => $slug,
             'title'         => $title
+        ]);
+    }
+
+    #[Route('/new', name: 'new')]
+    public function indexNew(ItemRepository $itemRepo, Request $request)
+    {
+        /* finding number of the page in the url */
+        $page = $request->query->getInt('page', 1);
+        /* finding order and orderType to sort the creations */
+        $order = $request->query->getString('order', 'desc');
+        $orderType = $request->query->getString('orderType', 'date');
+
+        $creations = $itemRepo->findCreationsPaginated($page, "", $orderType, $order, 9, true);
+
+
+
+        return $this->render('Creations/index.html.twig', [
+            'creations'         => $creations,
+            'slug'              => "",
+            'title'             => 'Mes dernières créations',
+            'new'               => true
         ]);
     }
 
