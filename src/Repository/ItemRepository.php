@@ -2,9 +2,13 @@
 
 namespace App\Repository;
 
+use DateTime;
+use DateInterval;
 use App\Entity\Item;
+use DateTimeImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\ORM\Query\AST\Functions\CurrentDateFunction;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
@@ -24,7 +28,7 @@ class ItemRepository extends ServiceEntityRepository
 
     /* function to return creations paginated */
     /* page = number of the actual page, catSlug = slug of the category, limit = number max of products to find */
-    public function findCreationsPaginated(int $page, string $catSlug, string $orderType, string $order, int $limit = 6): array
+    public function findCreationsPaginated(int $page, string $catSlug, string $orderType, string $order, int $limit = 6, bool $new = false): array
     {
         /* setting the right values for the query */
         if($orderType == "alpha"){
@@ -49,27 +53,95 @@ class ItemRepository extends ServiceEntityRepository
         /* creation of the query, finding creations by the category's slug, if slug is empty then it takes all creations */
         if($catSlug){
             $query = $this->getEntityManager()->createQueryBuilder()
-                            ->select('c', 'creations')
-                            ->from('App\Entity\Item', 'creations')
-                            ->join('creations.category', 'c')
-                            ->where("c.slug = '$catSlug'")
-                            ->andWhere('creations.isActive = true')
-                            ->setMaxResults($limit)
-                            ->setFirstResult($firstResult)
-                            ->orderBy($ordType, $ord);
+                    ->select('c', 'creations')
+                    ->from('App\Entity\Item', 'creations')
+                    ->join('creations.category', 'c')
+                    ->where("c.slug = '$catSlug'")
+                    ->andWhere('creations.isActive = true')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($firstResult)
+                    ->orderBy($ordType, $ord);
+        } else if ($new == true){
+            $query = $this->getEntityManager()->createQueryBuilder()
+                    ->select('creations')
+                    ->from('App\Entity\Item', 'creations')
+                    ->where('creations.isActive = true')
+                    ->andWhere('creations.isNew = true')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($firstResult)
+                    ->orderBy($ordType, $ord );
         } else {
             $query = $this->getEntityManager()->createQueryBuilder()
-                            ->select('creations')
-                            ->from('App\Entity\Item', 'creations')
-                            ->where('creations.isActive = true')
-                            ->setMaxResults($limit)
-                            ->setFirstResult($firstResult)
-                            ->orderBy($ordType, $ord );
+                    ->select('creations')
+                    ->from('App\Entity\Item', 'creations')
+                    ->where('creations.isActive = true')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($firstResult)
+                    ->orderBy($ordType, $ord );
         }
 
         /* making the pagination */
         $paginator = new Paginator($query);
         $data = $paginator->getQuery()->getResult();
+
+        if (empty($data))
+            return ($result);
+
+        $totalCreations = $paginator->count();
+
+        /* calcul of the number of pages */
+        $pages = ceil($totalCreations / $limit);
+
+        /* puting datas in result */
+        $result['data'] = $data;
+        $result['pages'] = $pages;
+        $result['page'] = $page;
+        $result['limit'] = $limit;
+        $result['order'] = $orderType . '_' . $order;
+        $result['totalCreations'] = $totalCreations;
+
+        return ($result);
+    }
+
+    public function findNewCreation(int $page, string $orderType, string $order, int $limit = 6): array
+    {
+        /* setting the right values for the query */
+        if($orderType == "alpha"){
+            $ordType = "creations.title";
+        } else {
+            $ordType = "creations.createdAt";
+        }
+        if($order == "asc"){
+            $ord = "ASC";
+        } else {
+            $ord = "DESC";
+        }
+
+        /* absolute value of limit to avoid error */
+        $limit = abs($limit);
+
+        $result = [];
+
+        /* calcul of the first resultat that should be displayed */
+        $firstResult = $page * $limit - $limit;
+
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+
+        $qb->select('creations')
+            ->from('App\Entity\Item', 'creations')
+            ->where('creations.isActive = true')
+            ->andWhere('creations.isNew = true')
+            ->setMaxResults($limit)
+            ->setFirstResult($firstResult)
+            ->orderBy($ordType, $ord );
+
+
+        /* making the pagination */
+        $paginator = new Paginator($qb);
+        $data = $paginator->getQuery()->getResult();
+
+        // dd($data);
 
         if (empty($data))
             return ($result);
