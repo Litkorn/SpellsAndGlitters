@@ -9,7 +9,7 @@
 					<div class="row align-items-center justify-content-center">
 							<div class="col-sm-5 col-xxl-4 col-11 mr-xxl-5 mb-4"><img class="picture-details" src="{{ asset(dl_dir ~ creation.picture) }}" alt="{{ creation.title}}" /></div>
 							<div class="col-sm-6 align-self-start ml-sm-4 mx-auto">
-									<a class="h4 mb-5" href="{{ path('app_creations_category', {slug: creation.category.slug}) }}">{{ creation.category }}</a>
+									<a class="h4 mb-5 link-danger link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_creations_category', {slug: creation.category.slug}) }}">{{ creation.category }}</a>
 									<h1 class="fw-bolder my-3">{{ creation.title }}</h1>
 									<div class="lead">{{ creation.description|raw }}</div>
 									<div class="d-flex">
@@ -25,13 +25,13 @@
 														{% endfor %}
 														{# displays heart icon accordingly if isFavorite is true or false #}
 														{% if isFavorite %}
-																<a class="nav-link" href="{{ path('app_creations_remove_favorite', {id: creation.id}) }}"><i class="fa-solid fa-heart fa-lg mr-md-3" style="color: #ffa494"></i> Déjà en favoris!</a>
+																<a class="link-secondary link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_creations_remove_favorite', {id: creation.id}) }}"><i class="fa-solid fa-heart fa-lg mr-md-3" style="color: #ffa494"></i> Retirer des favoris</a>
 														{% else %}
-																<a class="text-danger" href="{{ path('app_creations_add_favorite', {id: creation.id}) }}"><i class="fa-regular fa-heart fa-lg mr-md-3" style="color: #ffa494"></i> Ajouter aux favoris</a>
+																<a class="link-danger link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_creations_add_favorite', {id: creation.id}) }}"><i class="fa-regular fa-heart fa-lg mr-md-3" style="color: #ffa494"></i> Ajouter aux favoris</a>
 														{% endif %}
 												{# diplays en empty heart if user isn't identified #}
 												{% else %}
-														<a href="{{ path('app_login') }}"><i class="fa-regular fa-heart fa-lg mr-md-3" style="color: #ffa494"></i> Ajouter aux favoris</a>
+														<a class="link-danger link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_login') }}"><i class="fa-regular fa-heart fa-lg mr-md-3" style="color: #ffa494"></i> Ajouter aux favoris</a>
 												{% endif %}
 										</span>
 									</div>
