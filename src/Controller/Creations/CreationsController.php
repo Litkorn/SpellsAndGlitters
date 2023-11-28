@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 #[Route('/creations', name: 'app_creations_')]
@@ -38,26 +37,32 @@ class CreationsController extends AbstractController
 
     /* Creation list (by Category) */
     #[Route('/category/{slug}', name: 'category')]
-    public function indexCategory($slug, Category $category, ItemRepository $itemRepo, Request $request)
+    public function indexCategory(ItemRepository $itemRepo, Request $request, Category $category = null)
     {
-        $slug = $category->getSlug();
-        $title = $category->getTitle();
+        if($category == null){
+            return $this->redirectToRoute('app_home');
+        } else {
+            $slug = $category->getSlug();
+            $title = $category->getTitle();
 
-        /* finding number of the page in the url */
-        $page = $request->query->getInt('page', 1);
-        /* finding order and orderType to sort the creations */
-        $order = $request->query->getString('order', 'desc');
-        $orderType = $request->query->getString('orderType', 'date');
+            /* finding number of the page in the url */
+            $page = $request->query->getInt('page', 1);
+            /* finding order and orderType to sort the creations */
+            $order = $request->query->getString('order', 'desc');
+            $orderType = $request->query->getString('orderType', 'date');
 
-        $creations = $itemRepo->findCreationsPaginated($page, $slug, $orderType, $order, 9, false);
+            $creations = $itemRepo->findCreationsPaginated($page, $slug, $orderType, $order, 9, false);
 
-        return $this->render('Creations/index.html.twig', [
-            'creations'     => $creations,
-            'slug'          => $slug,
-            'title'         => $title
-        ]);
+            return $this->render('Creations/index.html.twig', [
+                'creations'     => $creations,
+                'slug'          => $slug,
+                'title'         => $title
+            ]);
+        }
+
     }
 
+    /* New creations list */
     #[Route('/new', name: 'new')]
     public function indexNew(ItemRepository $itemRepo, Request $request)
     {
@@ -69,14 +74,30 @@ class CreationsController extends AbstractController
 
         $creations = $itemRepo->findCreationsPaginated($page, "", $orderType, $order, 9, true);
 
-
-
         return $this->render('Creations/index.html.twig', [
             'creations'         => $creations,
             'slug'              => "",
             'title'             => 'Mes dernières créations',
             'new'               => true
         ]);
+    }
+
+    /* Creations Details */
+    #[Route('/details/{slug}', name: 'details')]
+    public function showCreation(ItemRepository $itemRepo, Item $creation = null)
+    {
+        if($creation == null){
+            return $this->redirectToRoute('app_home');
+        } else {
+            $id = $creation->getId();
+            $catId = $creation->getCategory()->getId();
+            /* gets 4 random crations in the same category */
+            $randCreations = $itemRepo->findRandomCreations($id, $catId, 4);
+            return $this->render('Creations/show.html.twig', [
+                'creation'      => $creation,
+                'randCreations' => $randCreations
+            ]);
+        }
     }
 
     /* Routes to handle favorites */

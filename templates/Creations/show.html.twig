@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ creation.title }} | Spells and Glitters {% endblock %}
+
+{% block body %}
+
+	<section class="py-md-5">
+			<div class="container px-4 px-lg-5 my-5">
+					<div class="row align-items-center justify-content-center">
+							<div class="col-sm-5 col-xxl-4 col-11 mr-xxl-5 mb-4"><img class="picture-details" src="{{ asset(dl_dir ~ creation.picture) }}" alt="{{ creation.title}}" /></div>
+							<div class="col-sm-6 align-self-start ml-sm-4 mx-auto">
+									<a class="h4 mb-5" href="{{ path('app_creations_category', {slug: creation.category.slug}) }}">{{ creation.category }}</a>
+									<h1 class="fw-bolder my-3">{{ creation.title }}</h1>
+									<div class="lead">{{ creation.description|raw }}</div>
+									<div class="d-flex">
+										<span class="my-3">
+												{# Verify if user is identified #}
+												{% if app.user and is_granted("ROLE_USER") %}
+														{% set isFavorite = false %}
+														{% for favorite in creation.favorites %}
+																{% if favorite.id == app.user.id %}
+																{# if a creation's favorite's id == user's id, set isFavorite == true #}
+																		{% set isFavorite = true %}
+																{% endif %}
+														{% endfor %}
+														{# displays heart icon accordingly if isFavorite is true or false #}
+														{% if isFavorite %}
+																<a class="nav-link" href="{{ path('app_creations_remove_favorite', {id: creation.id}) }}"><i class="fa-solid fa-heart fa-lg mr-md-3" style="color: #ffa494"></i> Déjà en favoris!</a>
+														{% else %}
+																<a class="text-danger" href="{{ path('app_creations_add_favorite', {id: creation.id}) }}"><i class="fa-regular fa-heart fa-lg mr-md-3" style="color: #ffa494"></i> Ajouter aux favoris</a>
+														{% endif %}
+												{# diplays en empty heart if user isn't identified #}
+												{% else %}
+														<a href="{{ path('app_login') }}"><i class="fa-regular fa-heart fa-lg mr-md-3" style="color: #ffa494"></i> Ajouter aux favoris</a>
+												{% endif %}
+										</span>
+									</div>
+							</div>
+					</div>
+					<section class="text-center mt-5">
+							<hr class="col-8 mx-auto">
+							<h2 class="my-5">Dans la même catégorie</h2>
+							<div class="row mb-5">
+							{% if randCreations == null %}
+								<div class="h3">Désolée, il n'y a pas d'autres créations pour le moment!</div>
+							{% else %}
+							{# display list of creations in same category #}
+								{% for randCrea in randCreations %}
+									<div class="col-md-3 col-6 mb-4 fadein">
+											<a href="{{ path('app_creations_details', {slug: randCrea.slug}) }}">
+													<img class="picture-details-more" src="{{ asset(dl_dir ~ randCrea.picture) }}" alt="...">
+											</a>
+									</div>
+								{% endfor %}
+								</div>
+							{% endif %}
+
+
+					</section>
+			</div>
+
+	</section>
+
+
+{% endblock %}
