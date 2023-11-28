@@ -13,9 +13,9 @@
             <div class="row">
             {% for creation in creations %}
                 <div class="col-lg-3 col-md-6 col-6 h-100 fadein mb-3 text-start">
-                    <img class="card-img-top picture-home" src="{{ asset(dl_dir ~ creation.picture) }}" alt="{{creation.title}}" style="height: 300px; object-fit: cover;">
+                    <a href="{{ path('app_creations_details', {id: creation.id}) }}"><img class="card-img-top picture-home" src="{{ asset(dl_dir ~ creation.picture) }}" alt="{{creation.title}}" style="height: 300px; object-fit: cover;"></a>
                     <div class="position-relative">
-                        <div class="mt-2 fs-5 font-sawarabi p-md-0 pr-4">{{ creation.title }}</div>
+                        <a class="link-secondary link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_creations_details', {id: creation.id}) }}"><div class="mt-2 fs-5 font-sawarabi p-md-0 pr-4">{{ creation.title }}</div></a>
                         <span class="position-absolute top-0 end-0">
                             {# Verify if user is identified #}
                             {% if app.user and is_granted("ROLE_USER") %}
