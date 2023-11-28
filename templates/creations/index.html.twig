@@ -40,9 +40,9 @@
             <div class="row">
                 {% for creation in creations.data %}
                     <div class="col-lg-4 col-md-6 col-6 fadein mb-5 text-start">
-                        <a href="{{ path('app_creations_details', {id: creation.id}) }}"><img class="picture-creations mx-auto d-block" src="{{ asset(dl_dir ~ creation.picture) }}" alt="{{creation.title}}"></a>
+                        <a href="{{ path('app_creations_details', {slug: creation.slug}) }}"><img class="picture-creations mx-auto d-block" src="{{ asset(dl_dir ~ creation.picture) }}" alt="{{creation.title}}"></a>
                         <div class="position-relative">
-                            <a class="link-secondary link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_creations_details', {id: creation.id}) }}"><div class="title-creation font-sawarabi pr-5">{{ creation.title }}</div></a>
+                            <a class="link-secondary link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_creations_details', {slug: creation.slug}) }}"><div class="title-creation font-sawarabi pr-5">{{ creation.title }}</div></a>
                             <span class="position-absolute top-0 end-0">
                                 {# Verify if user is identified #}
                                 {% if app.user and is_granted("ROLE_USER") %}

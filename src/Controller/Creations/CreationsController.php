@@ -78,15 +78,18 @@ class CreationsController extends AbstractController
     }
 
     /* Creations Details */
-    #[Route('/details/{id}', name: 'details')]
-    public function showCreation(Item $creation = null, Request $request)
+    #[Route('/details/{slug}', name: 'details')]
+    public function showCreation(ItemRepository $itemRepo, Item $creation = null)
     {
-        $route = $request->headers->get('referer');
         if($creation == null){
-            return $this->redirectToRoute('app_creations_new');
+            return $this->redirectToRoute('app_home');
         } else {
+            $id = $creation->getId();
+            $catId = $creation->getCategory()->getId();
+            $randCreations = $itemRepo->findRandomCreations($id, $catId, 4);
             return $this->render('Creations/show.html.twig', [
-                'creation' => $creation
+                'creation'      => $creation,
+                'randCreations' => $randCreations
             ]);
         }
     }

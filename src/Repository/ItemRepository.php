@@ -103,63 +103,29 @@ class ItemRepository extends ServiceEntityRepository
         return ($result);
     }
 
-    public function findNewCreation(int $page, string $orderType, string $order, int $limit = 6): array
+    public function findRandomCreations(int $excludeId, int $catId, int $limit = 4): array
     {
-        /* setting the right values for the query */
-        if($orderType == "alpha"){
-            $ordType = "creations.title";
-        } else {
-            $ordType = "creations.createdAt";
-        }
-        if($order == "asc"){
-            $ord = "ASC";
-        } else {
-            $ord = "DESC";
-        }
-
-        /* absolute value of limit to avoid error */
         $limit = abs($limit);
 
         $result = [];
 
-        /* calcul of the first resultat that should be displayed */
-        $firstResult = $page * $limit - $limit;
+        $query = $this->getEntityManager()->createQueryBuilder();
 
-        $qb = $this->getEntityManager()->createQueryBuilder();
+        $query->select('creations')
+                ->from('App\Entity\Item', 'creations')
+                ->join('creations.category', 'c')
+                ->where("c.id = '$catId'")
+                ->andWhere($query->expr()->neq('creations.id', $excludeId))
+                ->andWhere('creations.isActive = true');
 
+        $result = $query->getQuery()->getResult();
 
-        $qb->select('creations')
-            ->from('App\Entity\Item', 'creations')
-            ->where('creations.isActive = true')
-            ->andWhere('creations.isNew = true')
-            ->setMaxResults($limit)
-            ->setFirstResult($firstResult)
-            ->orderBy($ordType, $ord );
+        shuffle($result);
 
+        if(count($result) > 4)
+            $result = array_slice($result, 0, $limit);
 
-        /* making the pagination */
-        $paginator = new Paginator($qb);
-        $data = $paginator->getQuery()->getResult();
-
-        // dd($data);
-
-        if (empty($data))
-            return ($result);
-
-        $totalCreations = $paginator->count();
-
-        /* calcul of the number of pages */
-        $pages = ceil($totalCreations / $limit);
-
-        /* puting datas in result */
-        $result['data'] = $data;
-        $result['pages'] = $pages;
-        $result['page'] = $page;
-        $result['limit'] = $limit;
-        $result['order'] = $orderType . '_' . $order;
-        $result['totalCreations'] = $totalCreations;
-
-        return ($result);
+        return($result);
     }
 
 //    /**
