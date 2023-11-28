@@ -37,24 +37,29 @@ class CreationsController extends AbstractController
 
     /* Creation list (by Category) */
     #[Route('/category/{slug}', name: 'category')]
-    public function indexCategory(Category $category, ItemRepository $itemRepo, Request $request)
+    public function indexCategory(ItemRepository $itemRepo, Request $request, Category $category = null)
     {
-        $slug = $category->getSlug();
-        $title = $category->getTitle();
+        if($category == null){
+            return $this->redirectToRoute('app_home');
+        } else {
+            $slug = $category->getSlug();
+            $title = $category->getTitle();
 
-        /* finding number of the page in the url */
-        $page = $request->query->getInt('page', 1);
-        /* finding order and orderType to sort the creations */
-        $order = $request->query->getString('order', 'desc');
-        $orderType = $request->query->getString('orderType', 'date');
+            /* finding number of the page in the url */
+            $page = $request->query->getInt('page', 1);
+            /* finding order and orderType to sort the creations */
+            $order = $request->query->getString('order', 'desc');
+            $orderType = $request->query->getString('orderType', 'date');
 
-        $creations = $itemRepo->findCreationsPaginated($page, $slug, $orderType, $order, 9, false);
+            $creations = $itemRepo->findCreationsPaginated($page, $slug, $orderType, $order, 9, false);
 
-        return $this->render('Creations/index.html.twig', [
-            'creations'     => $creations,
-            'slug'          => $slug,
-            'title'         => $title
-        ]);
+            return $this->render('Creations/index.html.twig', [
+                'creations'     => $creations,
+                'slug'          => $slug,
+                'title'         => $title
+            ]);
+        }
+
     }
 
     /* New creations list */
@@ -86,6 +91,7 @@ class CreationsController extends AbstractController
         } else {
             $id = $creation->getId();
             $catId = $creation->getCategory()->getId();
+            /* gets 4 random crations in the same category */
             $randCreations = $itemRepo->findRandomCreations($id, $catId, 4);
             return $this->render('Creations/show.html.twig', [
                 'creation'      => $creation,

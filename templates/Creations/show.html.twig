@@ -39,13 +39,14 @@
 					</div>
 					<section class="text-center mt-5">
 							<hr class="col-8 mx-auto">
-							<h2 class="my-5">Créations similaires</h2>
+							<h2 class="my-5">Dans la même catégorie</h2>
 							<div class="row mb-5">
 							{% if randCreations == null %}
 								<div class="h3">Désolée, il n'y a pas d'autres créations pour le moment!</div>
 							{% else %}
+							{# display list of creations in same category #}
 								{% for randCrea in randCreations %}
-									<div class="col-md-3 col-6 mb-4">
+									<div class="col-md-3 col-6 mb-4 fadein">
 											<a href="{{ path('app_creations_details', {slug: randCrea.slug}) }}">
 													<img class="picture-details-more" src="{{ asset(dl_dir ~ randCrea.picture) }}" alt="...">
 											</a>

@@ -105,12 +105,14 @@ class ItemRepository extends ServiceEntityRepository
 
     public function findRandomCreations(int $excludeId, int $catId, int $limit = 4): array
     {
+        /* absolute value of limit */
         $limit = abs($limit);
 
         $result = [];
 
         $query = $this->getEntityManager()->createQueryBuilder();
 
+        /* select all creations in the same category of the creation selected, except it */
         $query->select('creations')
                 ->from('App\Entity\Item', 'creations')
                 ->join('creations.category', 'c')
@@ -120,8 +122,10 @@ class ItemRepository extends ServiceEntityRepository
 
         $result = $query->getQuery()->getResult();
 
+        /* shuffle order */
         shuffle($result);
 
+        /* if more than 4 creations, slice to only have 4 */
         if(count($result) > 4)
             $result = array_slice($result, 0, $limit);
 
