@@ -4,10 +4,18 @@
 {% endblock %}
 
 {% block body %}
-	{{ form_start(form) }}
-	{{ form_row(form.email) }}
-	{{ form_row(form.object) }}
-	{{ form_row(form.message) }}
-	<button type="submit" class="btn btn-primary text-secondary d-block mx-auto">Envoyer</button>
-	{{ form_end(form) }}
+	<div class="container-fluid col-10 col-md-4 my-3">
+		<h1 class="h3 mb-3 font-weight-normal text-center">S'inscrire</h1>
+
+		<div>
+		{{ form_errors(form) }}
+				{{ form_start(form) }}
+						{{ form_row(form.email) }}
+						{{ form_row(form.object) }}
+						{{ form_row(form.message) }}
+
+						<button type="submit" class="btn btn-primary text-secondary d-block mx-auto">Inscription</button>
+				{{ form_end(form) }}
+		</div>
+	</div>
 {% endblock %}
