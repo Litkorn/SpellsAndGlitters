@@ -16,8 +16,9 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
-    <body class="p-0 d-flex flex-column" style="min-height: 100vh;">
-
+    <body class="p-0 m-0 d-flex flex-column" style="min-height: 100vh;">
+        {# we get the route to make conditionnal display in the navbar #}
+        {% set route = app.request.attributes.get('_route') %}
         {% block header %}
             {# header include #}
             {% include "_partials/_header.html.twig" %}

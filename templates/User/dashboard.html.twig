@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord | Spells and Glitters{% endblock %}
+
+{% block body %}
+<div class="container mt-10">
+    <div class="row">
+        {% include "_partials/_dashboard.html.twig" %}
+        <div class="col-md-7">
+            <p>Bonjour <b>{{app.user.userIdentifier}}</b>! (Vous n'êtes pas <b>{{app.user.userIdentifier}}</b>? <a class="link-danger" href="{{ path('app_logout')}}">Déconnexion</a> )</p>
+            <p>Depuis votre tableau de bord, vous pouvez consulter et modifier vos <a class="link-danger" href="{{ path('app_profil_informations') }}">informations</a> personnelles ainsi que consulter et gérer vos <a class="link-danger" href="{{ path('app_profil_favorites') }}">favoris</a>.</p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
