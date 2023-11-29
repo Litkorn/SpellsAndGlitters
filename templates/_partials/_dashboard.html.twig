@@ -1,7 +1,7 @@
 {# dashboard from profile #}
-<div class="list-group col-md-4 col-10 mx-auto">
+<div class="list-group col-md-4 col-10 mx-auto mb-4">
 		<a href="{{ path('app_profil_dashboard') }}" class="list-group-item list-group-item-action {% if route == 'app_profil_dashboard' %} active text-secondary {% endif %} ">Tableau de bord</a>
-		<a href="{{ path('app_profil_informations') }}" class="list-group-item list-group-item-action {% if route == 'app_profil_informations' %} active text-secondary {% endif %}">Mes informations</a>
+		<a href="{{ path('app_profil_informations', {id: user.id}) }}" class="list-group-item list-group-item-action {% if route == 'app_profil_informations' %} active text-secondary {% endif %}">Mes informations</a>
 		<a href="{{ path('app_profil_favorites') }}" class="list-group-item list-group-item-action {% if route == 'app_profil_favorites' %} active text-secondary {% endif %}">Mes favoris</a>
 		<a href="{{ path('app_logout') }}" class="list-group-item list-group-item-action bg-danger text-white">Se déconnecter</a>
 </div>
