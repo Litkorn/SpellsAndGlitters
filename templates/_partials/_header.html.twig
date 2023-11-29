@@ -46,7 +46,7 @@
 										<a class="nav-link {% if route == 'app_about' %} active {% endif %}" href="#">A propos</a>
 								</li>
 								<li class="nav-item">
-										<a class="nav-link {% if route == 'app_contact' %} active {% endif %}" href="#">Contact</a>
+										<a class="nav-link {% if route == 'app_contact' %} active {% endif %}" href="{{ path('app_contact') }}">Contact</a>
 								</li>
 								{# dropdown with conditionnal links #}
 								<li class="nav-item dropdown">

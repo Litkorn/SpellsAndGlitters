@@ -24,7 +24,7 @@
                     {{ form_row(registrationForm.email) }}
                     {{ form_row(registrationForm.plainPassword, { label: 'Password' }) }}
                     {{ form_row(registrationForm.agreeTerms, {
-                        label: 'En validant mon inscription, j\'accepte les <a href="' ~ path("app_cgu") ~ '">' ~ "CGU" ~ '</a>.',
+                        label: 'En validant mon inscription, j\'accepte les <a class="link-danger" href="' ~ path("app_cgu") ~ '">' ~ "CGU" ~ '</a>.',
                         label_html: true
                     }) }}
 
