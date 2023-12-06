@@ -13,7 +13,7 @@
             <div class="row">
             {% for creation in creations %}
                 <div class="col-lg-3 col-md-6 col-6 h-100 fadein mb-3 text-start">
-                    <a href="{{ path('app_creations_details', {slug: creation.slug}) }}"><img class="card-img-top picture-home" src="{{ asset(dl_dir ~ creation.picture) }}" alt="{{creation.title}}" style="height: 300px; object-fit: cover;"></a>
+                    <a href="{{ path('app_creations_details', {slug: creation.slug}) }}"><img class="card-img-top picture-home" src="{{ asset(dl_dir ~ creation.picture) }}" alt="{{creation.title}}"></a>
                     <div class="position-relative">
                         <a class="link-secondary link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_creations_details', {slug: creation.slug}) }}"><div class="mt-2 fs-5 font-sawarabi p-md-0 pr-4">{{ creation.title }}</div></a>
                         <span class="position-absolute top-0 end-0">
@@ -46,37 +46,36 @@
     </section>
 
     {# "See more" section #}
-
     <section class="text-center">
         <h2 class="my-5">En voir plus</h2>
         <div class="row mb-5 mx-auto mw-100">
             <div class="col-md col-8 fadein p-0 mx-auto mb-2">
                 <a href="{{ path('app_creations_category', {slug: "crochet"}) }}">
-                    <img class="card-img-top picture-home" src="{{ asset("assets/img/crochet.jpg") }}" alt="...">
+                    <img class="card-img-top picture-home" src="{{ asset("assets/img/crochet.jpg") }}" alt="Peluche fantôme en crochet">
                     <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Crochet</div>
                 </a>
             </div>
             <div class="col-md col-8 fadein p-0 mx-auto mb-2">
                 <a href="{{ path('app_creations_category', {slug: "resine"}) }}">
-                    <img class="card-img-top picture-home" src="{{ asset("assets/img/resine.jpg") }}" alt="...">
+                    <img class="card-img-top picture-home" src="{{ asset("assets/img/resine.jpg") }}" alt="Boucles d'oreilles en résine en forme de fleurs">
                     <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Résine</div>
                 </a>
             </div>
             <div class="col-md col-8 fadein p-0 mx-auto mb-2">
                 <a href="{{ path('app_creations_category', {slug: "peinture"}) }}">
-                    <img class="card-img-top picture-home" src="{{ asset("assets/img/peinture.jpg") }}" alt="...">
+                    <img class="card-img-top picture-home" src="{{ asset("assets/img/peinture.jpg") }}" alt="Peinture représentant Médusa">
                     <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Peinture</div>
                 </a>
             </div>
             <div class="col-md col-8 fadein p-0 mx-auto mb-2">
                 <a href="{{ path('app_creations_category', {slug: "digital"}) }}">
-                    <img class="card-img-top picture-home" src="{{ asset("assets/img/digital.png") }}" alt="...">
+                    <img class="card-img-top picture-home" src="{{ asset("assets/img/digital.png") }}" alt="Dessin digital représenant un lapin dans l'espace">
                     <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Dessin digital</div>
                 </a>
             </div>
             <div class="col-md col-8 fadein p-0 mx-auto mb-2">
                 <a href="{{ path('app_creations_category', {slug: "fimo"}) }}">
-                    <img class="card-img-top picture-home" src="{{ asset("assets/img/fimo.jpg") }}" alt="...">
+                    <img class="card-img-top picture-home" src="{{ asset("assets/img/fimo.jpg") }}" alt="Boucle d'oreille papillon en Fimo au motif damier">
                     <div class="position-absolute top-50 start-50 translate-middle h1 fw-bold text-primary txt-home">Argile polymère</div>
                 </a>
             </div>
