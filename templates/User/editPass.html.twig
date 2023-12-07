@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification du mot de passe | Spells and Glitters{% endblock %}
+
+{% block body %}
+	<div class="container-fluid col-10 col-md-4 my-3">
+			<h1 class="h3 mb-3 font-weight-normal text-center">Modification du mot de passe</h1>
+
+			<div>
+			{{ form_errors(form) }}
+					{{ form_start(form) }}
+							{{ form_row(form.oldPassword) }}
+							{{ form_row(form.plainPassword) }}
+							{{ form_widget(form._token) }}
+							<div class="row justify-content-around">
+								<a class="col-5 btn btn-primary text-secondary d-block mx-auto">Annuler</a>
+								<button type="submit" class="col-5 btn btn-primary text-secondary d-block mx-auto">Confirmer</button>
+							</div>
+					{{ form_end(form) }}
+			</div>
+	</div>
+{% endblock %}
