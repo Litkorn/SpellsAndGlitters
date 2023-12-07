@@ -40,7 +40,8 @@ class UserCrudController extends AbstractCrudController
         ->setEntityLabelInSingular('Utilisateur')
         ->setEntityLabelInPlural('Utilisateurs')
         ->setDefaultSort(['id' => 'DESC'])
-        ->setPaginatorPageSize(20);
+        ->setPaginatorPageSize(20)
+        ->setFormOptions(['validation_groups' => ['registration']]);
     }
 
     public function configureFields(string $pageName): iterable
