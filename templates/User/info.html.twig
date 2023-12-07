@@ -7,7 +7,28 @@
     <div class="row">
         {% include "_partials/_dashboard.html.twig" %}
         <div class="col-md-7 col-10 mx-auto">
-            <p>Informations personnelles</p>
+            <h1 class="h4">Informations personnelles</h1>
+            <div class="row">
+                <div class="col">
+                    <label for="">Nom</label>
+                    <input type="text" class="form-control" value="{{ user.lastName }}" disabled>
+                </div>
+                <div class="col">
+                    <label for="">Prénom</label>
+                    <input type="text" class="form-control" value="{{ user.name }}" disabled>
+                </div>
+                <div class="col-12">
+                    <label for="">Email</label>
+                    <input type="text" class="form-control" value="{{ user.email }}" disabled>
+                </div>
+                <hr class="my-4 col">
+                <div class="col-12 mb-5">
+                    <div class="row justify-content-around">
+                        <a class="btn btn-primary col-5 mt-3 text-secondary" href="">Changer mes informations</a>
+                        <a class="btn btn-secondary col-5 mt-3" href="{{ path('app_profil_editPass', {id: user.id}) }}">Changer mon mot de passe</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
