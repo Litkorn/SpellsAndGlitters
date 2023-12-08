@@ -9,7 +9,7 @@
         <div class="col-md-7 col-10 mx-auto">
             <h1 class="h4">Informations personnelles</h1>
             <p>Bonjour <b>{{app.user.userIdentifier}}</b>! (Vous n'êtes pas <b>{{app.user.userIdentifier}}</b>? <a class="link-danger" href="{{ path('app_logout')}}">Déconnexion</a> )</p>
-            <p>Depuis votre tableau de bord, vous pouvez consulter et modifier vos <a class="link-danger" href="{{ path('app_profil_informations') }}">informations</a> personnelles ainsi que consulter et gérer vos <a class="link-danger" href="{{ path('app_profil_favorites') }}">favoris</a>.</p>
+            <p>Depuis votre tableau de bord, vous pouvez consulter et modifier vos <a class="link-danger" href="{{ path('app_profil_informations', {id: user.id}) }}">informations</a> personnelles ainsi que consulter et gérer vos <a class="link-danger" href="{{ path('app_profil_favorites') }}">favoris</a>.</p>
         </div>
     </div>
 </div>
