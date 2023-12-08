@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,10 +16,20 @@ class EditInfosType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label'     => 'Prénom'
+                'label'     => 'Prénom',
+                'required'  => false
             ])
-            ->add('lastname', TextType::class, [
-                'label'     => 'Nom  '
+            ->add('lastName', TextType::class, [
+                'label'     => 'Nom  ',
+                'required'  => false
+            ])
+            ->add('email', EmailType::class, [
+                'label'     => 'Nom  ',
+                'required'  => false
+            ])
+            ->add('pass', PasswordType::class, [
+                'label'     => 'Mot de passe',
+                'mapped'    => false
             ])
         ;
     }
