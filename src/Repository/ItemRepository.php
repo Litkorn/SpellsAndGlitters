@@ -50,7 +50,7 @@ class ItemRepository extends ServiceEntityRepository
         /* calcul of the first resultat that should be displayed */
         $firstResult = $page * $limit - $limit;
 
-        /* creation of the query, finding creations by the category's slug, if slug is empty then it takes all creations */
+        /* creation of the query, finding creations by the category's slug, if slug is empty then it takes new creations, if new = false, then takes all creations */
         if($catSlug){
             $query = $this->getEntityManager()->createQueryBuilder()
                     ->select('c', 'creations')
