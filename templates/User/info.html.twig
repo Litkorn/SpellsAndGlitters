@@ -21,14 +21,34 @@
                     <label for="">Email</label>
                     <input type="text" class="form-control" value="{{ user.email }}" disabled>
                 </div>
-                <hr class="my-4 col">
-                <div class="col-12 mb-5">
+                <div class="col-12 my-2">
                     <div class="row justify-content-around">
-                        <a class="btn btn-primary col-5 mt-3 text-secondary" href="">Changer mes informations</a>
+                        <a class="btn btn-primary col-5 mt-3 text-secondary" href="{{ path('app_profil_editInfos', {id: user.id}) }}">Changer mes informations</a>
                         <a class="btn btn-secondary col-5 mt-3" href="{{ path('app_profil_editPass', {id: user.id}) }}">Changer mon mot de passe</a>
                     </div>
                 </div>
+                <hr class="my-4 col">
+                <a class="link-danger fw-medium" data-bs-toggle="modal" data-bs-target="#exampleModal" href="">Suppression du compte</a>
             </div>
+        </div>
+    </div>
+</div>
+
+{# Modal #}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title fs-5 h2" id="exampleModalLabel">Suppression de compte</div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Vous êtes sur le point de supprimer votre compte, l'effet est immédiat. Continuer ?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <a type="button" class="btn btn-danger texte-light" href="{{ path('app_profil_delete', {id: user.id}) }}">Supprimer</a>
+        </div>
         </div>
     </div>
 </div>
