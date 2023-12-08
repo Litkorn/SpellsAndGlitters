@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 #[Route('/profil', name:'app_profil_')]
 class UserController extends AbstractController
@@ -107,6 +108,28 @@ class UserController extends AbstractController
             'user'  => $user
         ]);
 
+    }
+
+    /* logout user */
+    public function logoutUser(TokenStorageInterface $storage)
+    {
+        $storage->setToken(null);
+    }
+
+    /* delete account */
+    #[Route("/delete/{id}", name:"delete")]
+    public function delete(Request $request, UserRepository $userRepo, TokenStorageInterface $storage, EntityManagerInterface $manager, User $user = null)
+    {
+        if($user == null || $userRepo->isSameUser($request, $user) == false){
+            return $this->redirectToRoute('app_home');
+        }
+        if ($user) {
+            $this->logoutUser($storage);
+            $manager->remove($user);
+            $manager->flush();
+            $this->addFlash('success', 'Votre compte a bien été supprimé, à bientôt !');
+        }
+        return $this->redirectToRoute('app_home');
     }
 
 
