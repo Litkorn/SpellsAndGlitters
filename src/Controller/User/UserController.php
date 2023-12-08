@@ -3,6 +3,7 @@
 namespace App\Controller\User;
 
 use App\Entity\User;
+use App\Form\EditInfosType;
 use App\Form\EditPassType;
 use App\Repository\UserRepository;
 use Symfony\Component\Form\FormError;
@@ -20,7 +21,11 @@ class UserController extends AbstractController
     #[Route('/', name: 'dashboard')]
     public function index(): Response
     {
-        return $this->render('User/dashboard.html.twig');
+        $user = $this->getUser();
+
+        return $this->render('User/dashboard.html.twig', [
+            'user'  => $user
+        ]);
     }
 
     /* profil informations page */
@@ -65,6 +70,39 @@ class UserController extends AbstractController
         }
 
         return $this->render('User/editPass.html.twig', [
+            'form'  => $form,
+            'user'  => $user
+        ]);
+
+    }
+    /* profil edit informations page */
+    #[Route('/editInfos/{id}', name: 'editInfos')]
+    public function editInfos(EntityManagerInterface $em, UserPasswordHasherInterface $hasher, Request $request, UserRepository $userRepo, User $user = null)
+    {
+        /* check if id is the same as identified user's one */
+        if($user == null || $userRepo->isSameUser($request, $user) == false){
+            return $this->redirectToRoute('app_home');
+        }
+
+        $form = $this->createForm(EditInfosType::class, $user);
+        $form->handleRequest($request);
+
+        /* if my form is submitted */
+        if ($form->isSubmitted()) {
+            /* if the password is not valid, an error is added, if good and the form is valid, change the informations*/
+            if($hasher->isPasswordValid($user, $form->get('pass')->getData()) == false){
+                $form->get('pass')->addError(new FormError('Le mot de passe indiqué est incorrect'));
+            } else if ($form->isValid()){
+                $em->persist($user);
+                $em->flush();
+                $this->addFlash('success', 'Vos informations on été mises à jour !');
+                return $this->redirectToRoute('app_profil_informations', [
+                    'id'    => $user->getId()
+                ]);
+            }
+        }
+
+        return $this->render('User/editInfos.html.twig', [
             'form'  => $form,
             'user'  => $user
         ]);
