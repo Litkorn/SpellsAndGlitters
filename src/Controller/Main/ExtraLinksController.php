@@ -11,9 +11,8 @@ class ExtraLinksController extends AbstractController
     #[Route('/CGU', name: 'app_cgu')]
     public function index(): Response
     {
-        return $this->render('Main/extra_links/index.html.twig', [
-            'title' => 'CGU | Spells and Glitters',
-            'controller_name' => 'CGU'
+        return $this->render('Main/extra_links/cgu.html.twig', [
+            'title' => 'CGU | Spells and Glitters'
         ]);
     }
 }

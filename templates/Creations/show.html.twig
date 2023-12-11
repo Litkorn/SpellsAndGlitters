@@ -46,11 +46,11 @@
 							{% if randCreations == null %}
 								<div class="h3">Désolée, il n'y a pas d'autres créations pour le moment!</div>
 							{% else %}
-							{# display list of creations in same category #}
+							{# display random list of creations in same category #}
 								{% for randCrea in randCreations %}
 									<div class="col-md-3 col-6 mb-4 fadein">
 											<a href="{{ path('app_creations_details', {slug: randCrea.slug}) }}">
-													<img class="picture-details-more" src="{{ asset(dl_dir ~ randCrea.picture) }}" alt="...">
+													<img class="picture-details-more" src="{{ asset(dl_dir ~ randCrea.picture) }}" alt="{{ randCrea.title }}">
 											</a>
 									</div>
 								{% endfor %}
