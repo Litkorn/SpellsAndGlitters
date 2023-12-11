@@ -134,9 +134,18 @@ class UserController extends AbstractController
 
 
     /* profile favorites */
-    #[Route('/favorites', name:'favorites')]
-    public function manageFavorites(Request $request, User $user = null)
+    #[Route('/favorites/{id}', name:'favorites')]
+    public function manageFavorites(UserRepository $userRepo, Request $request, User $user = null)
     {
-        return $this->render('User/favorites.html.twig');
+        if($user == null || $userRepo->isSameUser($request, $user) == false){
+            return $this->redirectToRoute('app_home');
+        }
+
+        $favorites = $user->getItems();
+
+        return $this->render('User/favorites.html.twig', [
+            'user'      => $user,
+            'favorites' => $favorites
+        ]);
     }
 }
