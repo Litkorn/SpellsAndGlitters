@@ -2,6 +2,8 @@
 
 {% block title %}{{title}} | Spells and Glitters{% endblock %}
 
+{% block meta_description %}Les{% if new is defined and new == true %} dernières{% endif %} créations originales{% if slug %} en {{ slug }}{% endif %} de Spells and Glitters!{% endblock %}
+
 {# TODO: make link to creation details #}
 
 {# if slug is empty, it's all creations, when it's not empty, it's creations found by category and if new == true, then it's the news page #}
