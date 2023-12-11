@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://spells-glitters.lunidev.fr/</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/all</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/new</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/resine</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/fimo</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/digital</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/crochet</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/peinture</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/contact</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/register</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/login</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/details/vache-rose-et-blanche</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/details/boucles-doreilles-abstrait-resine-vert-et-jaune</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/details/boucle-doreille-papillon-fimo-noir-et-violet-pastel</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/details/fantome-crochet</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/all?orderType=date&amp;order=desc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/all?orderType=date&amp;order=asc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/all?orderType=alpha&amp;order=asc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/all?orderType=alpha&amp;order=desc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/details/lapin-nature-dessin-digital</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/details/lapin-spationaute-dessin-digital</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/details/peinture-medusa-gouache-sur-papier</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/details/boucles-doreilles-fleurs-bleu</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/details/boucles-doreilles-fleurs-orange-et-violet</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/all?page=1</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/all?page=2</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/new?orderType=date&amp;order=desc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/new?orderType=date&amp;order=asc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/new?orderType=alpha&amp;order=asc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/new?orderType=alpha&amp;order=desc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/resine?orderType=date&amp;order=desc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/resine?orderType=date&amp;order=asc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/resine?orderType=alpha&amp;order=asc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/resine?orderType=alpha&amp;order=desc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/details/porte-cle-etoile-violet-pastel</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/details/porte-cle-coeur-rose-et-blanc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/details/papillon-resine-bleu-transparent-et-blanc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/details/papillon-resine-bleu-et-blanc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/fimo?orderType=date&amp;order=desc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/fimo?orderType=date&amp;order=asc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/fimo?orderType=alpha&amp;order=asc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/fimo?orderType=alpha&amp;order=desc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/digital?orderType=date&amp;order=desc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/digital?orderType=date&amp;order=asc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/digital?orderType=alpha&amp;order=asc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/digital?orderType=alpha&amp;order=desc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/crochet?orderType=date&amp;order=desc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/crochet?orderType=date&amp;order=asc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/crochet?orderType=alpha&amp;order=asc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/crochet?orderType=alpha&amp;order=desc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/peinture?orderType=date&amp;order=desc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/peinture?orderType=date&amp;order=asc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/peinture?orderType=alpha&amp;order=asc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/category/peinture?orderType=alpha&amp;order=desc</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/CGU</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://spells-glitters.lunidev.fr/creations/all?page=3</loc>
+  <lastmod>2023-12-11T14:30:53+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
+</urlset>

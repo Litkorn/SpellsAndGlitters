@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{title}} | Spells and Glitters{% endblock %}
+{% block title %}{% if new is defined and new == true %}Les dernières {% endif %}Créations originales{% if slug %} en {{ slug }}{% endif %} | Spells and Glitters{% endblock %}
 
 {% block meta_description %}Les{% if new is defined and new == true %} dernières{% endif %} créations originales{% if slug %} en {{ slug }}{% endif %} de Spells and Glitters!{% endblock %}
 
